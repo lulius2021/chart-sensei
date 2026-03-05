@@ -28,6 +28,7 @@ export default function AnalyzePage() {
   const [analysis, setAnalysis] = useState<Analysis | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [remaining, setRemaining] = useState<number | string | null>(null);
   const [activeTab, setActiveTab] = useState<"analysis" | "strategy" | "learn">("analysis");
 
   const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -52,8 +53,9 @@ export default function AnalyzePage() {
       formData.append("image", imageFile);
       const res = await fetch("/api/analyze", { method: "POST", body: formData });
       const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "Analysis failed");
+      if (!res.ok) throw new Error(data.message || data.error || "Analysis failed");
       setAnalysis(data.analysis);
+      if (data.remaining !== undefined) setRemaining(data.remaining);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Analysis failed");
     } finally {
@@ -111,6 +113,9 @@ export default function AnalyzePage() {
           <Zap className="w-3.5 h-3.5" />
           {loading ? "Analyzing..." : "Analyze"}
         </button>
+        {remaining !== null && typeof remaining === "number" && (
+          <span className="text-[11px] text-text-dim">{remaining} left today</span>
+        )}
       </div>
 
       {/* Content */}

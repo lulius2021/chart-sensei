@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { createClient } from "@/lib/supabase/server";
 
+const FREE_DAILY_LIMIT = 3;
+
 const SYSTEM_PROMPT = `You are Chart-Sensei, an expert AI trading coach. Analyze the provided chart image and return a JSON response with the following structure:
 
 {
@@ -43,6 +45,42 @@ export async function POST(request: Request) {
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    // Check daily limit for free users
+    const { data: profile } = await supabase
+      .from("profiles")
+      .select("is_pro, analyses_today, analyses_reset_date")
+      .eq("id", user.id)
+      .single();
+
+    if (!profile) {
+      return NextResponse.json({ error: "Profile not found" }, { status: 404 });
+    }
+
+    const today = new Date().toISOString().split("T")[0];
+    let analysesToday = profile.analyses_today || 0;
+
+    // Reset counter if it's a new day
+    if (profile.analyses_reset_date !== today) {
+      analysesToday = 0;
+      await supabase
+        .from("profiles")
+        .update({ analyses_today: 0, analyses_reset_date: today })
+        .eq("id", user.id);
+    }
+
+    // Enforce limit for free users
+    if (!profile.is_pro && analysesToday >= FREE_DAILY_LIMIT) {
+      return NextResponse.json(
+        {
+          error: "Daily limit reached",
+          message: `Free users can analyze ${FREE_DAILY_LIMIT} charts per day. Upgrade to Pro for unlimited analyses.`,
+          limit: FREE_DAILY_LIMIT,
+          used: analysesToday,
+        },
+        { status: 429 }
+      );
     }
 
     const formData = await request.formData();
@@ -93,7 +131,7 @@ export async function POST(request: Request) {
       }
     }
 
-    // Save to Supabase
+    // Save to Supabase + increment counter
     const { error: dbError } = await supabase.from("analyses").insert({
       user_id: user.id,
       analysis: analysis,
@@ -102,7 +140,19 @@ export async function POST(request: Request) {
 
     if (dbError) console.error("DB save error:", dbError);
 
-    return NextResponse.json({ analysis });
+    // Increment daily counter
+    await supabase
+      .from("profiles")
+      .update({
+        analyses_today: analysesToday + 1,
+        analyses_reset_date: today,
+      })
+      .eq("id", user.id);
+
+    return NextResponse.json({
+      analysis,
+      remaining: profile.is_pro ? "unlimited" : FREE_DAILY_LIMIT - analysesToday - 1,
+    });
   } catch (error: unknown) {
     console.error("Analysis error:", error);
     return NextResponse.json({ error: "Analysis failed" }, { status: 500 });

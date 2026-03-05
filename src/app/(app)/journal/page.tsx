@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
-import { Plus, TrendingUp, TrendingDown, X } from "lucide-react";
+import { useState, useEffect, useCallback } from "react";
+import { Plus, TrendingUp, TrendingDown, X, Trash2, Loader2 } from "lucide-react";
+import { createClient } from "@/lib/supabase/client";
 
 interface JournalEntry {
   id: string;
@@ -9,40 +10,74 @@ interface JournalEntry {
   pair: string;
   direction: "long" | "short";
   strategy: string;
-  entry: string;
-  stopLoss: string;
-  takeProfit: string;
+  entry_price: string;
+  stop_loss: string;
+  take_profit: string;
   result: "win" | "loss" | "open" | "";
   pnl: string;
   notes: string;
 }
 
+const emptyForm: Omit<JournalEntry, "id"> = {
+  date: new Date().toISOString().split("T")[0],
+  pair: "",
+  direction: "long",
+  strategy: "",
+  entry_price: "",
+  stop_loss: "",
+  take_profit: "",
+  result: "",
+  pnl: "",
+  notes: "",
+};
+
 export default function JournalPage() {
   const [entries, setEntries] = useState<JournalEntry[]>([]);
   const [showForm, setShowForm] = useState(false);
-  const [form, setForm] = useState<Omit<JournalEntry, "id">>({
-    date: new Date().toISOString().split("T")[0],
-    pair: "",
-    direction: "long",
-    strategy: "",
-    entry: "",
-    stopLoss: "",
-    takeProfit: "",
-    result: "",
-    pnl: "",
-    notes: "",
-  });
+  const [form, setForm] = useState(emptyForm);
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const supabase = createClient();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const fetchEntries = useCallback(async () => {
+    setLoading(true);
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) { setLoading(false); return; }
+
+    const { data, error } = await supabase
+      .from("journal_entries")
+      .select("*")
+      .eq("user_id", user.id)
+      .order("date", { ascending: false });
+
+    if (!error && data) setEntries(data as JournalEntry[]);
+    setLoading(false);
+  }, [supabase]);
+
+  useEffect(() => { fetchEntries(); }, [fetchEntries]);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const entry: JournalEntry = { ...form, id: Date.now().toString() };
-    setEntries([entry, ...entries]);
-    setShowForm(false);
-    setForm({
-      date: new Date().toISOString().split("T")[0],
-      pair: "", direction: "long", strategy: "", entry: "",
-      stopLoss: "", takeProfit: "", result: "", pnl: "", notes: "",
+    setSaving(true);
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) { setSaving(false); return; }
+
+    const { error } = await supabase.from("journal_entries").insert({
+      user_id: user.id,
+      ...form,
     });
+
+    if (!error) {
+      setShowForm(false);
+      setForm(emptyForm);
+      fetchEntries();
+    }
+    setSaving(false);
+  };
+
+  const handleDelete = async (id: string) => {
+    const { error } = await supabase.from("journal_entries").delete().eq("id", id);
+    if (!error) setEntries(entries.filter((e) => e.id !== id));
   };
 
   const stats = {
@@ -132,17 +167,17 @@ export default function JournalPage() {
               <div className="grid grid-cols-3 gap-4">
                 <div>
                   <label className="block text-xs text-text-muted mb-1">Entry Price</label>
-                  <input type="text" placeholder="68200" value={form.entry} onChange={(e) => setForm({ ...form, entry: e.target.value })}
+                  <input type="text" placeholder="68200" value={form.entry_price} onChange={(e) => setForm({ ...form, entry_price: e.target.value })}
                     className="w-full bg-surface-3 border border-surface-4 rounded-lg px-3 py-2 text-sm text-white placeholder-text-dim focus:border-brand focus:outline-none" />
                 </div>
                 <div>
                   <label className="block text-xs text-text-muted mb-1">Stop Loss</label>
-                  <input type="text" placeholder="65800" value={form.stopLoss} onChange={(e) => setForm({ ...form, stopLoss: e.target.value })}
+                  <input type="text" placeholder="65800" value={form.stop_loss} onChange={(e) => setForm({ ...form, stop_loss: e.target.value })}
                     className="w-full bg-surface-3 border border-surface-4 rounded-lg px-3 py-2 text-sm text-white placeholder-text-dim focus:border-brand focus:outline-none" />
                 </div>
                 <div>
                   <label className="block text-xs text-text-muted mb-1">Take Profit</label>
-                  <input type="text" placeholder="74000" value={form.takeProfit} onChange={(e) => setForm({ ...form, takeProfit: e.target.value })}
+                  <input type="text" placeholder="74000" value={form.take_profit} onChange={(e) => setForm({ ...form, take_profit: e.target.value })}
                     className="w-full bg-surface-3 border border-surface-4 rounded-lg px-3 py-2 text-sm text-white placeholder-text-dim focus:border-brand focus:outline-none" />
                 </div>
               </div>
@@ -167,16 +202,25 @@ export default function JournalPage() {
                 <textarea rows={3} placeholder="What did you learn from this trade?" value={form.notes} onChange={(e) => setForm({ ...form, notes: e.target.value })}
                   className="w-full bg-surface-3 border border-surface-4 rounded-lg px-3 py-2 text-sm text-white placeholder-text-dim focus:border-brand focus:outline-none resize-none" />
               </div>
-              <button type="submit" className="w-full bg-brand text-surface-0 py-3 rounded-xl text-sm font-bold hover:bg-brand-light transition">
-                Save Entry
+              <button type="submit" disabled={saving}
+                className="w-full bg-brand text-surface-0 py-3 rounded-xl text-sm font-bold hover:bg-brand-light transition disabled:opacity-50 flex items-center justify-center gap-2">
+                {saving && <Loader2 className="w-4 h-4 animate-spin" />}
+                {saving ? "Saving..." : "Save Entry"}
               </button>
             </form>
           </div>
         </div>
       )}
 
-      {/* Entries List */}
-      {entries.length === 0 && !showForm && (
+      {/* Loading */}
+      {loading && (
+        <div className="flex items-center justify-center py-20">
+          <Loader2 className="w-6 h-6 text-brand animate-spin" />
+        </div>
+      )}
+
+      {/* Empty State */}
+      {!loading && entries.length === 0 && !showForm && (
         <div className="bg-surface-2 border border-surface-4 rounded-2xl p-12 text-center">
           <div className="text-5xl mb-4">📓</div>
           <h2 className="text-lg font-semibold text-white mb-2">No Entries Yet</h2>
@@ -189,10 +233,11 @@ export default function JournalPage() {
         </div>
       )}
 
-      {entries.length > 0 && (
+      {/* Entries List */}
+      {!loading && entries.length > 0 && (
         <div className="space-y-3">
           {entries.map((entry) => (
-            <div key={entry.id} className="bg-surface-2 border border-surface-4 rounded-xl px-5 py-4">
+            <div key={entry.id} className="bg-surface-2 border border-surface-4 rounded-xl px-5 py-4 group">
               <div className="flex items-center gap-3 mb-2">
                 <span className={`flex items-center gap-1 text-xs font-semibold px-2 py-0.5 rounded ${
                   entry.direction === "long" ? "bg-brand-muted text-brand" : "bg-loss/10 text-loss"
@@ -203,16 +248,20 @@ export default function JournalPage() {
                 <span className="text-sm font-semibold text-white">{entry.pair}</span>
                 <span className="text-xs text-text-dim">{entry.date}</span>
                 {entry.strategy && <span className="text-xs text-text-dim bg-surface-3 px-2 py-0.5 rounded">{entry.strategy}</span>}
-                <span className="ml-auto">
+                <span className="ml-auto flex items-center gap-3">
                   {entry.result === "win" && <span className="text-xs font-semibold text-profit">WIN {entry.pnl}</span>}
                   {entry.result === "loss" && <span className="text-xs font-semibold text-loss">LOSS {entry.pnl}</span>}
                   {(!entry.result || entry.result === "open") && <span className="text-xs text-text-dim">OPEN</span>}
+                  <button onClick={() => handleDelete(entry.id)}
+                    className="opacity-0 group-hover:opacity-100 text-text-dim hover:text-loss transition">
+                    <Trash2 className="w-3.5 h-3.5" />
+                  </button>
                 </span>
               </div>
               <div className="flex gap-6 text-xs text-text-dim">
-                <span>Entry: {entry.entry}</span>
-                <span>SL: {entry.stopLoss}</span>
-                <span>TP: {entry.takeProfit}</span>
+                <span>Entry: {entry.entry_price}</span>
+                <span>SL: {entry.stop_loss}</span>
+                <span>TP: {entry.take_profit}</span>
               </div>
               {entry.notes && <p className="text-xs text-text-muted mt-2 italic">{entry.notes}</p>}
             </div>
