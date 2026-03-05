@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <!-- Background circle -->
+  <circle cx="256" cy="256" r="240" fill="#0f1221" stroke="#34d399" stroke-width="3" opacity="0.15"/>
+  
+  <!-- Sensei figure - stylized hooded master -->
+  <g transform="translate(256, 240)">
+    <!-- Hood/head -->
+    <ellipse cx="0" cy="-80" rx="52" ry="56" fill="#34d399" opacity="0.12"/>
+    <ellipse cx="0" cy="-80" rx="48" ry="52" fill="#1a1f3a"/>
+    
+    <!-- Face area - mysterious shadow -->
+    <ellipse cx="0" cy="-72" rx="28" ry="24" fill="#0f1221"/>
+    
+    <!-- Eyes - glowing -->
+    <ellipse cx="-12" cy="-76" rx="4" ry="2.5" fill="#34d399"/>
+    <ellipse cx="12" cy="-76" rx="4" ry="2.5" fill="#34d399"/>
+    <!-- Eye glow -->
+    <ellipse cx="-12" cy="-76" rx="8" ry="5" fill="#34d399" opacity="0.15"/>
+    <ellipse cx="12" cy="-76" rx="8" ry="5" fill="#34d399" opacity="0.15"/>
+    
+    <!-- Robe body -->
+    <path d="M-60 -40 Q-65 20 -70 80 L-50 100 Q0 85 50 100 L70 80 Q65 20 60 -40 Q40 -55 0 -50 Q-40 -55 -60 -40Z" fill="#34d399" opacity="0.08"/>
+    <path d="M-56 -38 Q-60 20 -65 78 L-48 96 Q0 82 48 96 L65 78 Q60 20 56 -38 Q38 -52 0 -48 Q-38 -52 -56 -38Z" fill="#1a1f3a"/>
+    
+    <!-- Robe collar/fold line -->
+    <path d="M-20 -42 L0 -20 L20 -42" stroke="#34d399" stroke-width="1.5" fill="none" opacity="0.3"/>
+    
+    <!-- Chart candlestick in hand -->
+    <g transform="translate(0, 30)">
+      <!-- Candle wicks -->
+      <line x1="-16" y1="-20" x2="-16" y2="25" stroke="#34d399" stroke-width="1.5" opacity="0.5"/>
+      <line x1="-4" y1="-15" x2="-4" y2="30" stroke="#fb7185" stroke-width="1.5" opacity="0.5"/>
+      <line x1="8" y1="-25" x2="8" y2="20" stroke="#34d399" stroke-width="1.5" opacity="0.5"/>
+      <line x1="20" y1="-10" x2="20" y2="28" stroke="#34d399" stroke-width="1.5" opacity="0.5"/>
+      
+      <!-- Candle bodies -->
+      <rect x="-20" y="-12" width="8" height="18" rx="1" fill="#34d399" opacity="0.7"/>
+      <rect x="-8" y="-8" width="8" height="22" rx="1" fill="#fb7185" opacity="0.7"/>
+      <rect x="4" y="-18" width="8" height="20" rx="1" fill="#34d399" opacity="0.7"/>
+      <rect x="16" y="-4" width="8" height="16" rx="1" fill="#34d399" opacity="0.7"/>
+    </g>
+  </g>
+  
+  <!-- Subtle outer glow ring -->
+  <circle cx="256" cy="256" r="238" fill="none" stroke="#34d399" stroke-width="1" opacity="0.08"/>
+</svg>

@@ -1,66 +1,58 @@
 import Link from "next/link";
 import {
-  BarChart3, Brain, BookOpen, FileText, TrendingUp,
-  Zap, Shield, ArrowRight, CheckCircle2, Star,
-  ChevronRight, Sparkles, Target, LineChart
+  Zap, BookOpen, Brain, FileText, LineChart, Target,
+  ArrowRight, CheckCircle2, TrendingUp,
 } from "lucide-react";
 
+/* ─── Logo Component ─── */
+function SenseiLogo({ className = "w-10 h-10" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
+      <rect width="32" height="32" rx="6" fill="#0f1221" />
+      <ellipse cx="11" cy="10" rx="2.5" ry="1.5" fill="#34d399" />
+      <ellipse cx="21" cy="10" rx="2.5" ry="1.5" fill="#34d399" />
+      <ellipse cx="11" cy="10" rx="4" ry="3" fill="#34d399" opacity="0.15" />
+      <ellipse cx="21" cy="10" rx="4" ry="3" fill="#34d399" opacity="0.15" />
+      <rect x="7" y="17" width="3" height="8" rx="0.5" fill="#34d399" opacity="0.8" />
+      <rect x="12" y="19" width="3" height="6" rx="0.5" fill="#fb7185" opacity="0.8" />
+      <rect x="17" y="15" width="3" height="10" rx="0.5" fill="#34d399" opacity="0.8" />
+      <rect x="22" y="18" width="3" height="7" rx="0.5" fill="#34d399" opacity="0.8" />
+    </svg>
+  );
+}
+
+/* ─── Data ─── */
 const features = [
   {
     icon: Zap,
     title: "AI Chart Analysis",
-    desc: "Upload any chart screenshot and get instant pattern recognition, entry/exit points, and risk management — powered by advanced AI.",
-    color: "text-brand",
-    bg: "bg-brand/10",
+    desc: "Upload any chart screenshot — get instant pattern recognition, precise entry/exit points, and risk management in seconds.",
   },
   {
     icon: BookOpen,
     title: "19 Trading Strategies",
-    desc: "From Support & Resistance to Elliott Wave — master every strategy with detailed guides, rules, and real examples.",
-    color: "text-accent-blue",
-    bg: "bg-accent-blue/10",
+    desc: "From Support & Resistance to Elliott Wave. Master every strategy with rules, examples, and common mistakes to avoid.",
   },
   {
     icon: Brain,
     title: "Interactive Quizzes",
-    desc: "Test your pattern recognition skills with AI-generated quizzes. Track your progress and identify knowledge gaps.",
-    color: "text-accent-purple",
-    bg: "bg-accent-purple/10",
+    desc: "Test your pattern recognition. Track progress. Identify knowledge gaps before they cost you money.",
   },
   {
     icon: FileText,
     title: "Trading Journal",
-    desc: "Log every trade with entry, exit, strategy, and notes. Track your win rate and learn from your history.",
-    color: "text-accent-amber",
-    bg: "bg-accent-amber/10",
+    desc: "Log every trade. Track win rates. Analyze which strategies and pairs perform best for your style.",
   },
   {
     icon: LineChart,
     title: "Live Charts",
-    desc: "Professional TradingView charts built right in. Analyze any market — crypto, stocks, forex — without leaving the app.",
-    color: "text-accent-teal",
-    bg: "bg-accent-teal/10",
+    desc: "Professional TradingView charts built in. Crypto, stocks, forex — analyze any market without switching apps.",
   },
   {
     icon: Target,
     title: "Entry & Exit Points",
-    desc: "Get precise entry zones, stop-loss levels, and multiple take-profit targets with risk/reward ratios for every analysis.",
-    color: "text-accent-rose",
-    bg: "bg-accent-rose/10",
+    desc: "Every analysis includes entry zones, stop-loss levels, and multiple take-profit targets with risk/reward ratios.",
   },
-];
-
-const steps = [
-  { step: "01", title: "Upload Your Chart", desc: "Take a screenshot from TradingView, Binance, or any platform." },
-  { step: "02", title: "AI Analyzes Patterns", desc: "Our AI identifies patterns, support/resistance, and key levels." },
-  { step: "03", title: "Get Trade Setup", desc: "Receive entry, stop-loss, take-profits, and a full explanation." },
-  { step: "04", title: "Learn & Improve", desc: "Understand WHY — every analysis teaches you the strategy behind it." },
-];
-
-const testimonials = [
-  { name: "Alex K.", role: "Crypto Trader", text: "Chart-Sensei helped me understand chart patterns I was missing for months. The AI explanations are incredible.", stars: 5 },
-  { name: "Sarah M.", role: "Swing Trader", text: "The trading journal alone is worth it. Tracking my win rate helped me cut losing strategies fast.", stars: 5 },
-  { name: "David R.", role: "Forex Beginner", text: "I went from not understanding candlesticks to confidently identifying double bottoms. Game changer.", stars: 5 },
 ];
 
 const freeFeatures = ["3 chart analyses per day", "4 basic strategies", "Live TradingView charts", "Community access"];
@@ -68,171 +60,208 @@ const proFeatures = ["Unlimited chart analyses", "All 19 strategies", "Interacti
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen bg-surface-0 text-text-primary overflow-x-hidden">
-      {/* Nav */}
-      <nav className="fixed top-0 w-full z-50 border-b border-surface-4/50 bg-surface-0/80 backdrop-blur-xl">
-        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-          <Link href="/" className="text-xl font-extrabold text-white tracking-tight">
-            Chart<span className="text-brand">-Sensei</span>
-          </Link>
-          <div className="hidden md:flex items-center gap-8">
-            <a href="#features" className="text-sm text-text-muted hover:text-white transition">Features</a>
-            <a href="#how-it-works" className="text-sm text-text-muted hover:text-white transition">How It Works</a>
-            <a href="#pricing" className="text-sm text-text-muted hover:text-white transition">Pricing</a>
+    <div className="min-h-screen bg-surface-0 text-text-primary selection:bg-brand/20 selection:text-white">
+      {/* ═══ HERO ═══ */}
+      <section className="relative min-h-screen flex flex-col items-center justify-center px-6 overflow-hidden">
+        {/* Background effects — subtle, not flashy */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[600px] bg-brand/[0.03] rounded-full blur-[150px]" />
+          <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-surface-4/50 to-transparent" />
+        </div>
+
+        {/* Logo + Brand */}
+        <div className="relative mb-12 flex flex-col items-center">
+          <div className="mb-6">
+            <SenseiLogo className="w-16 h-16" />
           </div>
-          <div className="flex items-center gap-3">
-            <Link href="/login" className="text-sm text-text-muted hover:text-white transition px-4 py-2">
-              Log in
-            </Link>
-            <Link href="/login" className="text-sm font-semibold bg-brand text-surface-0 px-5 py-2 rounded-lg hover:bg-brand-light transition">
-              Get Started Free
-            </Link>
+          <div className="inline-flex items-center gap-2 bg-brand/[0.06] border border-brand/[0.12] rounded-full px-5 py-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-brand shadow-[0_0_8px_#34d399]" />
+            <span className="text-xs font-medium text-brand/80 tracking-wide">AI-Powered Trading Education</span>
           </div>
         </div>
-      </nav>
 
-      {/* Hero */}
-      <section className="relative pt-32 pb-20 px-6">
-        {/* Glow Effects */}
-        <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-brand/5 rounded-full blur-[150px] pointer-events-none" />
-        <div className="absolute top-40 left-1/4 w-[300px] h-[300px] bg-accent-purple/5 rounded-full blur-[100px] pointer-events-none" />
-
-        <div className="max-w-5xl mx-auto text-center relative">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 bg-brand/10 border border-brand/20 rounded-full px-4 py-1.5 mb-8">
-            <Sparkles className="w-3.5 h-3.5 text-brand" />
-            <span className="text-xs font-medium text-brand">AI-Powered Trading Education</span>
-          </div>
-
-          <h1 className="text-5xl md:text-7xl font-extrabold text-white leading-[1.1] tracking-tight mb-6">
-            Learn to trade with
+        {/* Headline */}
+        <div className="relative text-center max-w-4xl">
+          <h1 className="text-5xl sm:text-6xl md:text-[5.5rem] font-extrabold text-white leading-[1.05] tracking-tight">
+            Master the
             <br />
-            <span className="text-brand">AI-powered</span> analysis
+            <span className="text-brand">Art of Trading</span>
           </h1>
-
-          <p className="text-lg md:text-xl text-text-secondary max-w-2xl mx-auto mb-10 leading-relaxed">
-            Upload any chart screenshot and get instant pattern recognition, precise entry/exit points,
-            and educational explanations that actually teach you <em>why</em>.
+          <p className="mt-6 text-lg md:text-xl text-text-muted max-w-2xl mx-auto leading-relaxed font-light">
+            Upload any chart. Get instant AI analysis with precise entry and exit points.
+            Learn <em className="text-text-secondary not-italic">why</em> — not just what.
           </p>
-
-          <div className="flex items-center justify-center gap-4 mb-6">
-            <Link href="/login" className="group flex items-center gap-2 bg-brand text-surface-0 px-8 py-3.5 rounded-xl text-base font-bold hover:bg-brand-light transition shadow-glow">
-              Start Free <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-            <a href="#features" className="flex items-center gap-2 bg-surface-2 border border-surface-4 text-white px-8 py-3.5 rounded-xl text-base font-medium hover:border-surface-5 transition">
-              See Features
-            </a>
-          </div>
-
-          <p className="text-sm text-text-dim">No credit card required · 3 free analyses per day</p>
         </div>
 
-        {/* App Screenshot - Hero */}
-        <div className="max-w-6xl mx-auto mt-16 relative">
-          <div className="absolute inset-0 bg-gradient-to-t from-surface-0 via-transparent to-transparent z-10 pointer-events-none" />
-          <div className="relative rounded-2xl border border-surface-4 overflow-hidden shadow-2xl shadow-black/50 bg-surface-1">
-            {/* Browser Chrome */}
-            <div className="flex items-center gap-2 px-4 py-3 bg-surface-2 border-b border-surface-4">
+        {/* CTA */}
+        <div className="relative mt-10 flex flex-col sm:flex-row items-center gap-4">
+          <Link
+            href="/login"
+            className="group flex items-center gap-2.5 bg-brand text-surface-0 px-8 py-3.5 rounded-xl text-sm font-bold hover:bg-brand-light transition-all duration-200 shadow-[0_0_30px_rgba(52,211,153,0.15)]"
+          >
+            Start Learning Free
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+          </Link>
+          <a
+            href="#features"
+            className="text-sm text-text-dim hover:text-text-muted transition px-4 py-3"
+          >
+            See what&apos;s inside
+          </a>
+        </div>
+
+        <p className="relative mt-4 text-xs text-text-faint">
+          No credit card · 3 free analyses per day
+        </p>
+
+        {/* ─── Product Preview ─── */}
+        <div className="relative mt-20 w-full max-w-6xl">
+          {/* Fade out bottom */}
+          <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-surface-0 to-transparent z-10 pointer-events-none" />
+
+          <div className="rounded-2xl border border-white/[0.06] overflow-hidden bg-surface-1 shadow-[0_20px_80px_rgba(0,0,0,0.5)]">
+            {/* Browser bar */}
+            <div className="flex items-center gap-2 px-4 py-2.5 bg-surface-0/80 border-b border-white/[0.04]">
               <div className="flex gap-1.5">
-                <div className="w-3 h-3 rounded-full bg-loss/60" />
-                <div className="w-3 h-3 rounded-full bg-warn/60" />
-                <div className="w-3 h-3 rounded-full bg-brand/60" />
+                <div className="w-2.5 h-2.5 rounded-full bg-white/[0.06]" />
+                <div className="w-2.5 h-2.5 rounded-full bg-white/[0.06]" />
+                <div className="w-2.5 h-2.5 rounded-full bg-white/[0.06]" />
               </div>
               <div className="flex-1 flex justify-center">
-                <div className="bg-surface-3 border border-surface-4 rounded-md px-4 py-1 text-xs text-text-dim flex items-center gap-2">
-                  <Shield className="w-3 h-3" />
-                  chart-sensei.com/analyze
+                <div className="bg-white/[0.04] rounded-md px-4 py-1 text-[11px] text-text-faint flex items-center gap-1.5">
+                  <svg className="w-2.5 h-2.5" fill="currentColor" viewBox="0 0 16 16"><path d="M8 1a7 7 0 11-5.83 10.89l-.03-.05A7 7 0 018 1zm0 1.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11z"/><path d="M8 4v4l3 1.5-.67 1.34L7 9V4h1z"/></svg>
+                  chart-sensei.com
                 </div>
               </div>
             </div>
-            {/* App Content Mock */}
-            <div className="flex h-[520px]">
+
+            {/* App mock */}
+            <div className="flex h-[480px]">
               {/* Sidebar */}
-              <div className="w-56 bg-surface-1 border-r border-surface-4 p-4 hidden lg:block">
-                <div className="flex items-center gap-2 mb-6">
-                  <div className="w-8 h-8 rounded-lg bg-brand/20 flex items-center justify-center">
-                    <BarChart3 className="w-4 h-4 text-brand" />
-                  </div>
+              <div className="w-52 bg-surface-0/60 border-r border-white/[0.04] p-4 hidden lg:flex flex-col">
+                <div className="flex items-center gap-2.5 mb-8">
+                  <SenseiLogo className="w-7 h-7" />
                   <span className="text-sm font-bold text-white">Chart-Sensei</span>
                 </div>
-                {[
-                  { icon: BarChart3, label: "Dashboard", active: false },
-                  { icon: Zap, label: "Analyze", active: true },
-                  { icon: BookOpen, label: "Learn", active: false },
-                  { icon: Brain, label: "Quiz", active: false },
-                  { icon: FileText, label: "Journal", active: false },
-                  { icon: LineChart, label: "Live Charts", active: false },
-                ].map((item) => (
-                  <div key={item.label} className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm mb-1 ${
-                    item.active ? "bg-brand/10 text-brand font-semibold" : "text-text-dim hover:text-text-muted"
-                  }`}>
-                    <item.icon className="w-4 h-4" />
-                    {item.label}
+                <nav className="space-y-0.5 flex-1">
+                  {[
+                    { label: "Dashboard", active: false },
+                    { label: "Analyze", active: true },
+                    { label: "Learn", active: false },
+                    { label: "Quiz", active: false },
+                    { label: "Journal", active: false },
+                    { label: "Charts", active: false },
+                  ].map((item) => (
+                    <div
+                      key={item.label}
+                      className={`px-3 py-2 rounded-lg text-[13px] ${
+                        item.active
+                          ? "bg-brand/[0.08] text-brand font-medium"
+                          : "text-text-dim"
+                      }`}
+                    >
+                      {item.label}
+                    </div>
+                  ))}
+                </nav>
+                <div className="mt-auto pt-4 border-t border-white/[0.04]">
+                  <div className="flex items-center gap-2.5 px-2">
+                    <div className="w-7 h-7 rounded-full bg-brand/10 flex items-center justify-center text-[11px] font-bold text-brand">T</div>
+                    <div>
+                      <div className="text-xs text-white font-medium">Trader</div>
+                      <div className="text-[10px] text-text-faint">Free Plan</div>
+                    </div>
                   </div>
-                ))}
+                </div>
               </div>
 
-              {/* Main Area */}
+              {/* Main content */}
               <div className="flex-1 flex flex-col">
                 {/* Toolbar */}
-                <div className="flex items-center gap-3 px-5 py-2.5 border-b border-surface-4 bg-surface-1/80">
-                  <div className="flex items-center gap-1.5 bg-surface-3 border border-surface-4 rounded-md px-3 py-1.5 text-xs font-semibold text-white">
+                <div className="flex items-center gap-2 px-4 py-2 border-b border-white/[0.04] bg-surface-0/40">
+                  <span className="text-[11px] font-semibold text-white bg-white/[0.04] px-2.5 py-1 rounded flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-brand" />
                     BTC/USDT
-                  </div>
-                  {["1M", "5M", "15M", "1H", "4H", "1D"].map((tf) => (
-                    <span key={tf} className={`px-2.5 py-1 text-[11px] font-medium rounded ${
-                      tf === "4H" ? "bg-brand/10 text-brand border border-brand/30" : "bg-surface-3 border border-surface-4 text-text-dim"
-                    }`}>
+                  </span>
+                  {["15M", "1H", "4H", "1D"].map((tf) => (
+                    <span
+                      key={tf}
+                      className={`px-2 py-1 text-[10px] font-medium rounded ${
+                        tf === "4H" ? "bg-brand/[0.08] text-brand" : "text-text-faint"
+                      }`}
+                    >
                       {tf}
                     </span>
                   ))}
-                  <span className="ml-auto bg-brand text-surface-0 px-4 py-1.5 rounded-md text-xs font-bold flex items-center gap-1.5">
-                    <Zap className="w-3.5 h-3.5" /> Analyze
+                  <span className="ml-auto bg-brand text-surface-0 px-3 py-1 rounded text-[10px] font-bold flex items-center gap-1">
+                    <Zap className="w-3 h-3" /> Analyze
                   </span>
                 </div>
 
-                {/* Content */}
                 <div className="flex flex-1">
-                  {/* Chart placeholder */}
-                  <div className="flex-1 p-6 flex items-center justify-center">
-                    <div className="w-full h-full bg-surface-2 border border-surface-4 rounded-xl flex items-center justify-center">
-                      <div className="text-center">
-                        <div className="text-4xl mb-3">📊</div>
-                        <p className="text-sm text-text-muted">AI-Powered Chart Analysis</p>
-                        <p className="text-xs text-text-dim mt-1">Upload → Analyze → Learn</p>
+                  {/* Chart area */}
+                  <div className="flex-1 p-5">
+                    <div className="w-full h-full bg-surface-0/40 border border-white/[0.04] rounded-xl flex items-center justify-center">
+                      {/* Mini candlestick chart */}
+                      <div className="flex items-end gap-3 h-32">
+                        {[
+                          { h: 45, body: 25, y: 10, green: true },
+                          { h: 55, body: 20, y: 5, green: false },
+                          { h: 40, body: 22, y: 8, green: true },
+                          { h: 60, body: 30, y: 0, green: true },
+                          { h: 35, body: 18, y: 15, green: false },
+                          { h: 50, body: 28, y: 3, green: true },
+                          { h: 65, body: 35, y: 0, green: true },
+                          { h: 45, body: 20, y: 8, green: false },
+                          { h: 55, body: 30, y: 2, green: true },
+                          { h: 70, body: 40, y: 0, green: true },
+                        ].map((c, i) => (
+                          <div key={i} className="flex flex-col items-center" style={{ height: `${c.h + c.y}px`, paddingTop: `${c.y}px` }}>
+                            <div
+                              className={`w-1 rounded-full ${c.green ? "bg-brand/30" : "bg-loss/30"}`}
+                              style={{ height: `${(c.h - c.body) / 2}px` }}
+                            />
+                            <div
+                              className={`w-3 rounded-sm ${c.green ? "bg-brand/60" : "bg-loss/60"}`}
+                              style={{ height: `${c.body}px` }}
+                            />
+                            <div
+                              className={`w-1 rounded-full ${c.green ? "bg-brand/30" : "bg-loss/30"}`}
+                              style={{ height: `${(c.h - c.body) / 2}px` }}
+                            />
+                          </div>
+                        ))}
                       </div>
                     </div>
                   </div>
 
                   {/* AI Panel */}
-                  <div className="w-72 border-l border-surface-4 bg-surface-1 p-4 hidden xl:block">
+                  <div className="w-64 border-l border-white/[0.04] bg-surface-0/30 p-4 hidden xl:block">
                     <div className="flex items-center gap-2 mb-4">
                       <span className="w-2 h-2 rounded-full bg-brand shadow-[0_0_6px_#34d399]" />
-                      <span className="text-xs font-semibold text-white">AI Analysis</span>
-                      <span className="ml-auto text-[10px] text-brand">Complete</span>
+                      <span className="text-[11px] font-semibold text-white">AI Analysis</span>
+                      <span className="ml-auto text-[9px] text-brand font-medium">Complete</span>
                     </div>
-                    {[
-                      { label: "Pattern", value: "Ascending Triangle" },
-                      { label: "Direction", value: "Bullish", color: "text-profit" },
-                      { label: "Entry", value: "$67,400 – $67,800", color: "text-profit" },
-                      { label: "Stop Loss", value: "$65,200", color: "text-loss" },
-                      { label: "TP1", value: "$71,500", color: "text-profit" },
-                      { label: "Risk/Reward", value: "1:2.4", color: "text-warn" },
-                      { label: "Confidence", value: "HIGH", color: "text-brand" },
-                    ].map((item) => (
-                      <div key={item.label} className="bg-surface-2 border border-surface-4 rounded-lg px-3 py-2 flex items-center justify-between mb-1.5">
-                        <span className="text-[11px] text-text-dim">{item.label}</span>
-                        <span className={`text-[12px] font-semibold ${item.color || "text-white"}`}>{item.value}</span>
-                      </div>
-                    ))}
-                    <div className="mt-3 bg-surface-2 border border-surface-4 rounded-lg p-3">
-                      <div className="text-[10px] text-text-dim mb-2">Signals</div>
-                      <div className="flex flex-wrap gap-1">
-                        {["Volume Confirmed", "Clean Breakout", "Higher Lows"].map((s) => (
-                          <span key={s} className="text-[10px] font-semibold bg-brand/10 text-brand px-2 py-0.5 rounded">{s}</span>
-                        ))}
-                      </div>
+                    <div className="space-y-1.5">
+                      {[
+                        { l: "Pattern", v: "Ascending Triangle", c: "text-white" },
+                        { l: "Direction", v: "↑ Bullish", c: "text-profit" },
+                        { l: "Entry", v: "$67,400 – $67,800", c: "text-profit" },
+                        { l: "Stop Loss", v: "$65,200", c: "text-loss" },
+                        { l: "TP1", v: "$71,500", c: "text-profit" },
+                        { l: "R:R", v: "1:2.4", c: "text-warn" },
+                        { l: "Confidence", v: "HIGH", c: "text-brand" },
+                      ].map((row) => (
+                        <div key={row.l} className="bg-white/[0.02] border border-white/[0.04] rounded-lg px-3 py-2 flex items-center justify-between">
+                          <span className="text-[10px] text-text-faint">{row.l}</span>
+                          <span className={`text-[11px] font-semibold ${row.c}`}>{row.v}</span>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="mt-3 flex flex-wrap gap-1">
+                      {["Volume ✓", "Breakout", "Higher Lows"].map((s) => (
+                        <span key={s} className="text-[9px] font-semibold bg-brand/[0.06] text-brand/70 px-2 py-0.5 rounded">{s}</span>
+                      ))}
                     </div>
                   </div>
                 </div>
@@ -242,237 +271,226 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Logos / Social Proof */}
-      <section className="py-12 px-6 border-y border-surface-4/50">
-        <div className="max-w-5xl mx-auto text-center">
-          <p className="text-sm text-text-dim mb-6">Trusted by traders analyzing charts across all markets</p>
-          <div className="flex items-center justify-center gap-12 text-text-dim">
-            {["Crypto", "Stocks", "Forex", "Commodities", "Indices"].map((m) => (
-              <span key={m} className="text-sm font-semibold tracking-wide uppercase opacity-40">{m}</span>
-            ))}
-          </div>
+      {/* ═══ SOCIAL PROOF BAR ═══ */}
+      <section className="py-16 px-6">
+        <div className="max-w-4xl mx-auto flex items-center justify-center gap-16 text-text-faint">
+          {["Crypto", "Stocks", "Forex", "Commodities", "Indices"].map((m) => (
+            <span key={m} className="text-[11px] font-semibold tracking-[0.15em] uppercase opacity-30 hidden sm:block">{m}</span>
+          ))}
         </div>
       </section>
 
-      {/* Features */}
+      {/* ═══ FEATURES — Bento Grid ═══ */}
       <section id="features" className="py-24 px-6">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <span className="text-xs font-semibold text-brand uppercase tracking-widest">Features</span>
-            <h2 className="text-3xl md:text-5xl font-extrabold text-white mt-3 mb-4">Everything you need to learn trading</h2>
-            <p className="text-text-secondary max-w-2xl mx-auto">
-              AI analysis, education, journaling, and live charts — all in one platform designed to make you a better trader.
-            </p>
+          <div className="text-center mb-20">
+            <p className="text-xs font-medium text-brand/60 tracking-[0.2em] uppercase mb-4">Features</p>
+            <h2 className="text-3xl md:text-5xl font-extrabold text-white leading-tight">
+              Everything you need to
+              <br />
+              <span className="text-text-muted">master the charts</span>
+            </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {features.map((f) => (
-              <div key={f.title} className="group bg-surface-2 border border-surface-4 rounded-2xl p-6 hover:border-brand/30 transition-all duration-300">
-                <div className={`w-10 h-10 rounded-xl ${f.bg} flex items-center justify-center mb-4`}>
-                  <f.icon className={`w-5 h-5 ${f.color}`} />
-                </div>
-                <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-brand transition">{f.title}</h3>
-                <p className="text-sm text-text-muted leading-relaxed">{f.desc}</p>
+              <div
+                key={f.title}
+                className="group bg-white/[0.02] border border-white/[0.05] rounded-2xl p-7 hover:border-brand/[0.15] transition-all duration-300"
+              >
+                <f.icon className="w-5 h-5 text-brand/60 mb-5" />
+                <h3 className="text-base font-semibold text-white mb-2">{f.title}</h3>
+                <p className="text-sm text-text-dim leading-relaxed">{f.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* How It Works */}
-      <section id="how-it-works" className="py-24 px-6 bg-surface-1/50">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-16">
-            <span className="text-xs font-semibold text-brand uppercase tracking-widest">How it works</span>
-            <h2 className="text-3xl md:text-5xl font-extrabold text-white mt-3 mb-4">Four steps to better trading</h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {steps.map((s, i) => (
-              <div key={s.step} className="relative">
-                <div className="bg-surface-2 border border-surface-4 rounded-2xl p-6 h-full">
-                  <div className="text-3xl font-extrabold text-brand/20 mb-3">{s.step}</div>
-                  <h3 className="text-base font-semibold text-white mb-2">{s.title}</h3>
-                  <p className="text-sm text-text-muted">{s.desc}</p>
-                </div>
-                {i < 3 && (
-                  <ChevronRight className="hidden lg:block absolute top-1/2 -right-4 w-5 h-5 text-surface-4" />
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* App Screenshots Section - Strategy Library */}
+      {/* ═══ HOW IT WORKS ═══ */}
       <section className="py-24 px-6">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <span className="text-xs font-semibold text-brand uppercase tracking-widest">Strategy Library</span>
-              <h2 className="text-3xl md:text-4xl font-extrabold text-white mt-3 mb-4">Master 19 proven strategies</h2>
-              <p className="text-text-secondary mb-8 leading-relaxed">
-                Each strategy comes with detailed explanations, entry/exit rules, common mistakes, and real-world examples.
-                From beginner-friendly to advanced — there is a path for everyone.
-              </p>
-              <div className="space-y-3">
-                {["Support & Resistance", "Fibonacci Retracement", "RSI Divergence", "Smart Money Concepts", "Elliott Wave Theory"].map((s) => (
-                  <div key={s} className="flex items-center gap-3">
-                    <CheckCircle2 className="w-4 h-4 text-brand shrink-0" />
-                    <span className="text-sm text-text-secondary">{s}</span>
-                  </div>
-                ))}
-                <p className="text-xs text-text-dim pt-2">+ 14 more strategies in Pro</p>
-              </div>
-            </div>
-
-            {/* Strategy Card Mock */}
-            <div className="bg-surface-2 border border-surface-4 rounded-2xl overflow-hidden shadow-card">
-              <div className="p-6 border-b border-surface-4">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-xl bg-accent-purple/10 flex items-center justify-center">
-                    <TrendingUp className="w-5 h-5 text-accent-purple" />
-                  </div>
-                  <div>
-                    <h3 className="text-base font-semibold text-white">Fibonacci Retracement</h3>
-                    <p className="text-xs text-text-dim">Advanced · Swing Trading</p>
-                  </div>
-                  <span className="ml-auto text-[10px] font-semibold bg-brand/10 text-brand px-2.5 py-1 rounded-full">PRO</span>
-                </div>
-                <p className="text-sm text-text-muted leading-relaxed">
-                  Use Fibonacci levels to identify potential reversal zones and set precise entry points based on natural retracement levels.
-                </p>
-              </div>
-              <div className="p-6 space-y-3">
-                <h4 className="text-xs font-semibold text-text-dim uppercase tracking-wider">Key Levels</h4>
-                {[
-                  { level: "23.6%", desc: "Shallow retracement — strong trend" },
-                  { level: "38.2%", desc: "Common bounce zone" },
-                  { level: "61.8%", desc: "Golden ratio — strongest level" },
-                ].map((l) => (
-                  <div key={l.level} className="flex items-center gap-3 bg-surface-3 border border-surface-4 rounded-lg px-3 py-2.5">
-                    <span className="text-sm font-bold text-brand">{l.level}</span>
-                    <span className="text-xs text-text-muted">{l.desc}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Journal Section */}
-      <section className="py-24 px-6 bg-surface-1/50">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            {/* Journal Mock */}
-            <div className="bg-surface-2 border border-surface-4 rounded-2xl overflow-hidden shadow-card order-2 lg:order-1">
-              <div className="px-6 py-4 border-b border-surface-4 flex items-center justify-between">
-                <h3 className="text-sm font-semibold text-white">Trading Journal</h3>
-                <span className="text-xs bg-brand text-surface-0 px-3 py-1 rounded-md font-semibold">+ New Entry</span>
-              </div>
-              <div className="grid grid-cols-4 gap-3 p-4">
-                {[
-                  { label: "Total", value: "47", color: "text-white" },
-                  { label: "Wins", value: "31", color: "text-profit" },
-                  { label: "Losses", value: "16", color: "text-loss" },
-                  { label: "Win Rate", value: "66%", color: "text-brand" },
-                ].map((s) => (
-                  <div key={s.label} className="bg-surface-3 border border-surface-4 rounded-lg p-3 text-center">
-                    <div className={`text-lg font-bold ${s.color}`}>{s.value}</div>
-                    <div className="text-[10px] text-text-dim">{s.label}</div>
-                  </div>
-                ))}
-              </div>
-              <div className="px-4 pb-4 space-y-2">
-                {[
-                  { pair: "BTC/USDT", dir: "LONG", result: "WIN", pnl: "+$420", color: "text-profit", bg: "bg-brand/10 text-brand" },
-                  { pair: "ETH/USDT", dir: "SHORT", result: "WIN", pnl: "+$185", color: "text-profit", bg: "bg-loss/10 text-loss" },
-                  { pair: "SOL/USDT", dir: "LONG", result: "LOSS", pnl: "-$90", color: "text-loss", bg: "bg-brand/10 text-brand" },
-                ].map((t) => (
-                  <div key={t.pair + t.pnl} className="bg-surface-3 border border-surface-4 rounded-lg px-4 py-3 flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <span className={`text-[10px] font-semibold px-2 py-0.5 rounded ${t.bg}`}>{t.dir}</span>
-                      <span className="text-sm font-semibold text-white">{t.pair}</span>
-                    </div>
-                    <span className={`text-xs font-semibold ${t.color}`}>{t.result} {t.pnl}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="order-1 lg:order-2">
-              <span className="text-xs font-semibold text-brand uppercase tracking-widest">Trading Journal</span>
-              <h2 className="text-3xl md:text-4xl font-extrabold text-white mt-3 mb-4">Track every trade, learn from every mistake</h2>
-              <p className="text-text-secondary mb-8 leading-relaxed">
-                The best traders keep detailed journals. Log your entries, exits, strategies, and notes.
-                Track your win rate over time and identify which strategies work best for you.
-              </p>
-              <div className="space-y-3">
-                {["Automatic win rate calculation", "Filter by strategy, pair, or date", "P&L tracking", "Notes and lessons learned"].map((s) => (
-                  <div key={s} className="flex items-center gap-3">
-                    <CheckCircle2 className="w-4 h-4 text-brand shrink-0" />
-                    <span className="text-sm text-text-secondary">{s}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section className="py-24 px-6">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <span className="text-xs font-semibold text-brand uppercase tracking-widest">Testimonials</span>
-            <h2 className="text-3xl md:text-5xl font-extrabold text-white mt-3 mb-4">Loved by traders worldwide</h2>
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-20">
+            <p className="text-xs font-medium text-brand/60 tracking-[0.2em] uppercase mb-4">How it works</p>
+            <h2 className="text-3xl md:text-5xl font-extrabold text-white">
+              From chart to clarity
+              <br />
+              <span className="text-text-muted">in four steps</span>
+            </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {testimonials.map((t) => (
-              <div key={t.name} className="bg-surface-2 border border-surface-4 rounded-2xl p-6">
-                <div className="flex gap-0.5 mb-4">
-                  {Array.from({ length: t.stars }).map((_, i) => (
-                    <Star key={i} className="w-4 h-4 text-warn fill-warn" />
-                  ))}
-                </div>
-                <p className="text-sm text-text-secondary leading-relaxed mb-4">&ldquo;{t.text}&rdquo;</p>
+          <div className="space-y-0">
+            {[
+              { n: "01", title: "Upload Your Chart", desc: "Screenshot from TradingView, Binance, or any platform. Drop it in." },
+              { n: "02", title: "AI Detects Patterns", desc: "Our AI identifies formations, support/resistance levels, and key zones instantly." },
+              { n: "03", title: "Get Your Trade Setup", desc: "Precise entry zone, stop-loss, take-profit targets, and risk/reward ratio." },
+              { n: "04", title: "Learn the Why", desc: "Every analysis explains the reasoning. You don't just follow signals — you understand them." },
+            ].map((step, i) => (
+              <div key={step.n} className="flex gap-8 items-start py-8 border-b border-white/[0.04] last:border-0">
+                <span className="text-3xl font-extrabold text-brand/[0.12] shrink-0 w-12">{step.n}</span>
                 <div>
-                  <div className="text-sm font-semibold text-white">{t.name}</div>
-                  <div className="text-xs text-text-dim">{t.role}</div>
+                  <h3 className="text-lg font-semibold text-white mb-1">{step.title}</h3>
+                  <p className="text-sm text-text-dim leading-relaxed">{step.desc}</p>
                 </div>
+                {i < 3 && <ArrowRight className="w-4 h-4 text-white/[0.06] mt-1.5 shrink-0 hidden md:block" />}
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Pricing */}
-      <section id="pricing" className="py-24 px-6 bg-surface-1/50">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-16">
-            <span className="text-xs font-semibold text-brand uppercase tracking-widest">Pricing</span>
-            <h2 className="text-3xl md:text-5xl font-extrabold text-white mt-3 mb-4">Start free, upgrade when ready</h2>
-            <p className="text-text-secondary">No credit card required. Cancel anytime.</p>
+      {/* ═══ STRATEGY SHOWCASE ═══ */}
+      <section className="py-24 px-6">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div>
+            <p className="text-xs font-medium text-brand/60 tracking-[0.2em] uppercase mb-4">Strategy Library</p>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-4 leading-tight">
+              19 proven strategies,
+              <br />
+              <span className="text-text-muted">explained in depth</span>
+            </h2>
+            <p className="text-text-dim mb-8 leading-relaxed">
+              Each strategy includes detailed rules, entry/exit criteria, common mistakes, and real explanations.
+              From beginner-friendly to advanced institutional methods.
+            </p>
+            <div className="space-y-3">
+              {["Support & Resistance", "Fibonacci Retracement", "RSI Divergence", "Smart Money Concepts", "Elliott Wave Theory"].map((s) => (
+                <div key={s} className="flex items-center gap-3">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-brand/50 shrink-0" />
+                  <span className="text-sm text-text-muted">{s}</span>
+                </div>
+              ))}
+              <p className="text-xs text-text-faint pt-1">+ 14 more in Pro</p>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+          {/* Strategy card mock */}
+          <div className="bg-white/[0.02] border border-white/[0.05] rounded-2xl overflow-hidden">
+            <div className="p-6 border-b border-white/[0.04]">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-9 h-9 rounded-xl bg-brand/[0.06] flex items-center justify-center">
+                  <TrendingUp className="w-4 h-4 text-brand/60" />
+                </div>
+                <div>
+                  <h3 className="text-sm font-semibold text-white">Fibonacci Retracement</h3>
+                  <p className="text-[11px] text-text-faint">Advanced · Swing Trading</p>
+                </div>
+                <span className="ml-auto text-[9px] font-bold bg-brand/[0.08] text-brand/60 px-2.5 py-1 rounded-full tracking-wide">PRO</span>
+              </div>
+              <p className="text-sm text-text-dim leading-relaxed">
+                Use Fibonacci levels to identify potential reversal zones and set precise entry points based on natural retracement levels.
+              </p>
+            </div>
+            <div className="p-6 space-y-2.5">
+              <p className="text-[10px] font-semibold text-text-faint uppercase tracking-wider mb-3">Key Levels</p>
+              {[
+                { level: "23.6%", desc: "Shallow — strong trend continuation" },
+                { level: "38.2%", desc: "Common bounce zone" },
+                { level: "61.8%", desc: "Golden ratio — strongest level" },
+              ].map((l) => (
+                <div key={l.level} className="flex items-center gap-3 bg-white/[0.02] border border-white/[0.04] rounded-lg px-3 py-2.5">
+                  <span className="text-sm font-bold text-brand/70 w-12">{l.level}</span>
+                  <span className="text-[11px] text-text-dim">{l.desc}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ JOURNAL SHOWCASE ═══ */}
+      <section className="py-24 px-6">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          {/* Journal card mock */}
+          <div className="bg-white/[0.02] border border-white/[0.05] rounded-2xl overflow-hidden order-2 lg:order-1">
+            <div className="px-6 py-4 border-b border-white/[0.04] flex items-center justify-between">
+              <span className="text-sm font-semibold text-white">Trading Journal</span>
+              <span className="text-[10px] bg-brand text-surface-0 px-3 py-1 rounded font-bold">+ New</span>
+            </div>
+            <div className="grid grid-cols-4 gap-2.5 p-4">
+              {[
+                { label: "Total", value: "47", c: "text-white" },
+                { label: "Wins", value: "31", c: "text-profit" },
+                { label: "Losses", value: "16", c: "text-loss" },
+                { label: "Win Rate", value: "66%", c: "text-brand" },
+              ].map((s) => (
+                <div key={s.label} className="bg-white/[0.02] border border-white/[0.04] rounded-lg p-3 text-center">
+                  <div className={`text-lg font-bold ${s.c}`}>{s.value}</div>
+                  <div className="text-[9px] text-text-faint">{s.label}</div>
+                </div>
+              ))}
+            </div>
+            <div className="px-4 pb-4 space-y-1.5">
+              {[
+                { pair: "BTC/USDT", dir: "LONG", result: "WIN", pnl: "+$420", rc: "text-profit", dc: "bg-brand/[0.08] text-brand" },
+                { pair: "ETH/USDT", dir: "SHORT", result: "WIN", pnl: "+$185", rc: "text-profit", dc: "bg-loss/[0.08] text-loss" },
+                { pair: "SOL/USDT", dir: "LONG", result: "LOSS", pnl: "-$90", rc: "text-loss", dc: "bg-brand/[0.08] text-brand" },
+              ].map((t) => (
+                <div key={t.pair + t.pnl} className="bg-white/[0.02] border border-white/[0.04] rounded-lg px-4 py-2.5 flex items-center justify-between">
+                  <div className="flex items-center gap-2.5">
+                    <span className={`text-[9px] font-bold px-2 py-0.5 rounded ${t.dc}`}>{t.dir}</span>
+                    <span className="text-xs font-semibold text-white">{t.pair}</span>
+                  </div>
+                  <span className={`text-[11px] font-semibold ${t.rc}`}>{t.result} {t.pnl}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="order-1 lg:order-2">
+            <p className="text-xs font-medium text-brand/60 tracking-[0.2em] uppercase mb-4">Journal</p>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-4 leading-tight">
+              Track every trade,
+              <br />
+              <span className="text-text-muted">learn from every one</span>
+            </h2>
+            <p className="text-text-dim mb-8 leading-relaxed">
+              The best traders keep detailed journals. Log entries, exits, strategies, and notes.
+              Watch your win rate evolve and discover which setups work best for you.
+            </p>
+            <div className="space-y-3">
+              {["Automatic win rate tracking", "Filter by strategy or pair", "P&L calculation", "Notes & lessons learned"].map((s) => (
+                <div key={s} className="flex items-center gap-3">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-brand/50 shrink-0" />
+                  <span className="text-sm text-text-muted">{s}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ PRICING ═══ */}
+      <section id="pricing" className="py-24 px-6">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-20">
+            <p className="text-xs font-medium text-brand/60 tracking-[0.2em] uppercase mb-4">Pricing</p>
+            <h2 className="text-3xl md:text-5xl font-extrabold text-white">
+              Start free.
+              <br />
+              <span className="text-text-muted">Upgrade when ready.</span>
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-3xl mx-auto">
             {/* Free */}
-            <div className="bg-surface-2 border border-surface-4 rounded-2xl p-8">
-              <h3 className="text-lg font-semibold text-white mb-1">Free</h3>
-              <p className="text-sm text-text-dim mb-6">Get started with the basics</p>
+            <div className="bg-white/[0.02] border border-white/[0.05] rounded-2xl p-8">
+              <p className="text-sm font-semibold text-white mb-1">Free</p>
+              <p className="text-xs text-text-faint mb-6">Start with the basics</p>
               <div className="flex items-baseline gap-1 mb-8">
                 <span className="text-4xl font-extrabold text-white">$0</span>
-                <span className="text-text-dim text-sm">/month</span>
+                <span className="text-text-faint text-sm">/mo</span>
               </div>
-              <Link href="/login" className="block w-full text-center bg-surface-3 border border-surface-4 text-white py-3 rounded-xl text-sm font-semibold hover:border-surface-5 transition mb-8">
+              <Link
+                href="/login"
+                className="block w-full text-center bg-white/[0.04] border border-white/[0.06] text-white py-3 rounded-xl text-sm font-medium hover:bg-white/[0.06] transition mb-8"
+              >
                 Get Started
               </Link>
               <ul className="space-y-3">
                 {freeFeatures.map((f) => (
-                  <li key={f} className="flex items-center gap-3 text-sm text-text-secondary">
-                    <CheckCircle2 className="w-4 h-4 text-text-dim shrink-0" />
+                  <li key={f} className="flex items-center gap-3 text-sm text-text-dim">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-text-faint/50 shrink-0" />
                     {f}
                   </li>
                 ))}
@@ -480,23 +498,26 @@ export default function LandingPage() {
             </div>
 
             {/* Pro */}
-            <div className="bg-surface-2 border-2 border-brand/40 rounded-2xl p-8 relative shadow-glow">
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-brand text-surface-0 text-xs font-bold px-4 py-1 rounded-full">
-                MOST POPULAR
+            <div className="bg-white/[0.02] border border-brand/[0.2] rounded-2xl p-8 relative shadow-[0_0_40px_rgba(52,211,153,0.04)]">
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-brand text-surface-0 text-[10px] font-bold px-4 py-1 rounded-full tracking-wide">
+                POPULAR
               </div>
-              <h3 className="text-lg font-semibold text-white mb-1">Pro</h3>
-              <p className="text-sm text-text-dim mb-6">Everything, unlimited</p>
+              <p className="text-sm font-semibold text-white mb-1">Pro</p>
+              <p className="text-xs text-text-faint mb-6">Everything, unlimited</p>
               <div className="flex items-baseline gap-1 mb-8">
                 <span className="text-4xl font-extrabold text-white">$19</span>
-                <span className="text-text-dim text-sm">/month</span>
+                <span className="text-text-faint text-sm">/mo</span>
               </div>
-              <Link href="/login" className="block w-full text-center bg-brand text-surface-0 py-3 rounded-xl text-sm font-bold hover:bg-brand-light transition shadow-glow-sm mb-8">
-                Start Pro Trial
+              <Link
+                href="/login"
+                className="block w-full text-center bg-brand text-surface-0 py-3 rounded-xl text-sm font-bold hover:bg-brand-light transition shadow-[0_0_20px_rgba(52,211,153,0.1)] mb-8"
+              >
+                Start Pro
               </Link>
               <ul className="space-y-3">
                 {proFeatures.map((f) => (
-                  <li key={f} className="flex items-center gap-3 text-sm text-text-secondary">
-                    <CheckCircle2 className="w-4 h-4 text-brand shrink-0" />
+                  <li key={f} className="flex items-center gap-3 text-sm text-text-dim">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-brand/50 shrink-0" />
                     {f}
                   </li>
                 ))}
@@ -506,34 +527,36 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-24 px-6 relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-brand/5 via-transparent to-transparent pointer-events-none" />
-        <div className="max-w-3xl mx-auto text-center relative">
-          <h2 className="text-3xl md:text-5xl font-extrabold text-white mb-4">Ready to level up your trading?</h2>
-          <p className="text-text-secondary mb-8 text-lg">
-            Join thousands of traders using AI to understand charts better. Start for free today.
+      {/* ═══ FINAL CTA ═══ */}
+      <section className="py-32 px-6 text-center">
+        <div className="max-w-2xl mx-auto">
+          <SenseiLogo className="w-12 h-12 mx-auto mb-8" />
+          <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-4">
+            Ready to master the charts?
+          </h2>
+          <p className="text-text-dim mb-8">
+            Join traders learning to read markets with AI-powered analysis.
           </p>
-          <Link href="/login" className="group inline-flex items-center gap-2 bg-brand text-surface-0 px-10 py-4 rounded-xl text-lg font-bold hover:bg-brand-light transition shadow-glow">
-            Get Started Free <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+          <Link
+            href="/login"
+            className="group inline-flex items-center gap-2 bg-brand text-surface-0 px-8 py-3.5 rounded-xl text-sm font-bold hover:bg-brand-light transition shadow-[0_0_30px_rgba(52,211,153,0.15)]"
+          >
+            Start Free <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
           </Link>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="border-t border-surface-4 py-12 px-6">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="text-sm text-text-dim">
-            <span className="font-bold text-white">Chart<span className="text-brand">-Sensei</span></span>
-            {" "}· AI-Powered Trading Education
+      {/* ═══ FOOTER — Legal only ═══ */}
+      <footer className="border-t border-white/[0.04] py-8 px-6">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-2.5">
+            <SenseiLogo className="w-5 h-5" />
+            <span className="text-xs text-text-faint">© 2026 Chart-Sensei. All rights reserved.</span>
           </div>
-          <div className="flex items-center gap-6 text-sm text-text-dim">
-            <a href="#" className="hover:text-white transition">Terms</a>
-            <a href="#" className="hover:text-white transition">Privacy</a>
-            <a href="#" className="hover:text-white transition">Contact</a>
-          </div>
-          <div className="text-xs text-text-faint">
-            © 2026 Chart-Sensei. All rights reserved.
+          <div className="flex items-center gap-6">
+            <a href="#" className="text-xs text-text-faint hover:text-text-dim transition">Terms of Service</a>
+            <a href="#" className="text-xs text-text-faint hover:text-text-dim transition">Privacy Policy</a>
+            <a href="#" className="text-xs text-text-faint hover:text-text-dim transition">Imprint</a>
           </div>
         </div>
       </footer>

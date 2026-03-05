@@ -34,8 +34,19 @@ export default async function AppLayout({ children }: { children: React.ReactNod
     <div className="flex h-screen">
       <aside className="w-[240px] bg-surface-1 border-r border-surface-4 flex flex-col shrink-0">
         <div className="px-5 py-5 border-b border-surface-4">
-          <Link href="/dashboard" className="text-lg font-extrabold text-white">
-            Chart<span className="text-brand">-Sensei</span>
+          <Link href="/dashboard" className="flex items-center gap-2.5">
+            <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-8 h-8">
+              <rect width="32" height="32" rx="6" fill="#0f1221" />
+              <ellipse cx="11" cy="10" rx="2.5" ry="1.5" fill="#34d399" />
+              <ellipse cx="21" cy="10" rx="2.5" ry="1.5" fill="#34d399" />
+              <ellipse cx="11" cy="10" rx="4" ry="3" fill="#34d399" opacity="0.15" />
+              <ellipse cx="21" cy="10" rx="4" ry="3" fill="#34d399" opacity="0.15" />
+              <rect x="7" y="17" width="3" height="8" rx="0.5" fill="#34d399" opacity="0.8" />
+              <rect x="12" y="19" width="3" height="6" rx="0.5" fill="#fb7185" opacity="0.8" />
+              <rect x="17" y="15" width="3" height="10" rx="0.5" fill="#34d399" opacity="0.8" />
+              <rect x="22" y="18" width="3" height="7" rx="0.5" fill="#34d399" opacity="0.8" />
+            </svg>
+            <span className="text-base font-extrabold text-white">Chart<span className="text-brand">-Sensei</span></span>
           </Link>
         </div>
         <nav className="flex-1 overflow-y-auto py-3">

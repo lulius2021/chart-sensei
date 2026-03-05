@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <rect width="32" height="32" rx="6" fill="#0f1221"/>
+  <!-- Sensei eyes -->
+  <ellipse cx="11" cy="10" rx="2.5" ry="1.5" fill="#34d399"/>
+  <ellipse cx="21" cy="10" rx="2.5" ry="1.5" fill="#34d399"/>
+  <!-- Eye glow -->
+  <ellipse cx="11" cy="10" rx="4" ry="3" fill="#34d399" opacity="0.15"/>
+  <ellipse cx="21" cy="10" rx="4" ry="3" fill="#34d399" opacity="0.15"/>
+  <!-- Mini chart candles -->
+  <rect x="7" y="17" width="3" height="8" rx="0.5" fill="#34d399" opacity="0.8"/>
+  <rect x="12" y="19" width="3" height="6" rx="0.5" fill="#fb7185" opacity="0.8"/>
+  <rect x="17" y="15" width="3" height="10" rx="0.5" fill="#34d399" opacity="0.8"/>
+  <rect x="22" y="18" width="3" height="7" rx="0.5" fill="#34d399" opacity="0.8"/>
+</svg>
