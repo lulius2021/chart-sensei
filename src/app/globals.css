@@ -6,25 +6,42 @@
 
 :root {
   --brand: #34d399;
-  --surface-0: #09090b;
-  --surface-1: #0c0c0e;
-  --surface-2: #111113;
-  --surface-3: #141416;
-  --surface-4: #1c1c1e;
+  --surface-0: #0f1221;
+  --surface-1: #141831;
+  --surface-2: #1a1f3a;
+  --surface-3: #212747;
+  --surface-4: #2a3155;
 }
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: #1c1c1e transparent;
+  scrollbar-color: #2a3155 transparent;
 }
 
 body {
   background: var(--surface-0);
-  color: #e4e4e7;
+  color: #eef0f6;
   font-family: 'Inter', system-ui, sans-serif;
 }
 
 ::selection {
-  background: rgba(52, 211, 153, 0.2);
+  background: rgba(52, 211, 153, 0.25);
   color: #fff;
+}
+
+/* Glow border effect */
+.glow-border {
+  position: relative;
+}
+.glow-border::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(52,211,153,0.4), rgba(96,165,250,0.2), rgba(52,211,153,0.1));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
 }
