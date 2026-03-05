@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import Anthropic from "@anthropic-ai/sdk";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 import { createClient } from "@/lib/supabase/server";
 
 const SYSTEM_PROMPT = `You are Chart-Sensei, an expert AI trading coach. Analyze the provided chart image and return a JSON response with the following structure:
@@ -45,8 +45,6 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    // TODO: Check daily limit for free users (3/day)
-
     const formData = await request.formData();
     const image = formData.get("image") as File;
     if (!image) {
@@ -55,39 +53,38 @@ export async function POST(request: Request) {
 
     const bytes = await image.arrayBuffer();
     const base64 = Buffer.from(bytes).toString("base64");
-    const mediaType = image.type as "image/jpeg" | "image/png" | "image/gif" | "image/webp";
+    const mimeType = image.type;
 
-    const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
+    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
-    const response = await anthropic.messages.create({
-      model: "claude-haiku-4-5-20241022",
-      max_tokens: 2000,
-      messages: [
+    const result = await model.generateContent({
+      contents: [
         {
           role: "user",
-          content: [
+          parts: [
+            { text: SYSTEM_PROMPT + "\n\nAnalyze this trading chart. Return your analysis as JSON." },
             {
-              type: "image",
-              source: { type: "base64", media_type: mediaType, data: base64 },
-            },
-            {
-              type: "text",
-              text: "Analyze this trading chart. Return your analysis as JSON following the system prompt format.",
+              inlineData: {
+                mimeType: mimeType,
+                data: base64,
+              },
             },
           ],
         },
       ],
-      system: SYSTEM_PROMPT,
+      generationConfig: {
+        maxOutputTokens: 2000,
+        temperature: 0.3,
+      },
     });
 
-    const text = response.content[0].type === "text" ? response.content[0].text : "";
+    const text = result.response.text();
 
-    // Parse JSON from response
     let analysis;
     try {
       analysis = JSON.parse(text);
     } catch {
-      // Try extracting JSON from potential markdown
       const jsonMatch = text.match(/\{[\s\S]*\}/);
       if (jsonMatch) {
         analysis = JSON.parse(jsonMatch[0]);
