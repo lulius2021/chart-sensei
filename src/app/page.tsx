@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useCallback } from "react";
+import React, { useEffect, useRef, useCallback } from "react";
 import { Zap, BookOpen, Brain, FileText, LineChart, Target, ArrowRight, CheckCircle2 } from "lucide-react";
 
 /* ─── Logo ─── */
@@ -23,20 +23,23 @@ function Logo({ className = "w-10 h-10" }: { className?: string }) {
 
 /* ─── Floating Particles ─── */
 function Particles({ count = 20 }: { count?: number }) {
+  const [mounted, setMounted] = React.useState(false);
+  const particles = React.useMemo(() => {
+    if (!mounted) return [];
+    return Array.from({ length: count }).map(() => ({
+      left: `${Math.random() * 100}%`,
+      width: `${3 + Math.random() * 5}px`,
+      height: `${3 + Math.random() * 5}px`,
+      animationDuration: `${8 + Math.random() * 12}s`,
+      animationDelay: `${Math.random() * 10}s`,
+    }));
+  }, [count, mounted]);
+  React.useEffect(() => setMounted(true), []);
+  if (!mounted) return null;
   return (
     <div className="absolute inset-0 pointer-events-none overflow-hidden z-[3]">
-      {Array.from({ length: count }).map((_, i) => (
-        <div
-          key={i}
-          className="particle"
-          style={{
-            left: `${Math.random() * 100}%`,
-            width: `${3 + Math.random() * 5}px`,
-            height: `${3 + Math.random() * 5}px`,
-            animationDuration: `${8 + Math.random() * 12}s`,
-            animationDelay: `${Math.random() * 10}s`,
-          }}
-        />
+      {particles.map((style, i) => (
+        <div key={i} className="particle" style={style} />
       ))}
     </div>
   );
@@ -79,7 +82,8 @@ function useParallax() {
     ref.current.querySelectorAll(".sensei-char").forEach((el) => {
       const rect = (el.parentElement as HTMLElement).getBoundingClientRect();
       const speed = parseFloat((el as HTMLElement).dataset.speed || "0.15");
-      (el as HTMLElement).style.transform += ` translateY(${rect.top * speed}px)`;
+      const base = (el as HTMLElement).dataset.baseTransform || "";
+      (el as HTMLElement).style.transform = `${base} translateY(${rect.top * speed}px)`;
     });
   }, []);
   useEffect(() => {
@@ -103,7 +107,7 @@ export default function LandingPage() {
         <div className="sensei-parallax opacity-60" data-speed="0.15" style={{ backgroundImage: "url(/bg-pillar1.png)" }} />
         {/* Sensei: Green — LARGE, pushed to bottom half, behind text */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/sensei-green.png" alt="" data-speed="0.08"
+        <img src="/sensei-green.png" alt="" data-speed="0.08" data-base-transform="translateX(-50%)"
           className="sensei-char glow-pulse bottom-[-15%] left-1/2 w-[100vw] max-w-[1200px] z-[1]"
           style={{ transform: "translateX(-50%)", maskImage: "linear-gradient(to top, black 30%, transparent 70%), linear-gradient(to bottom, transparent 0%, black 30%)", WebkitMaskImage: "linear-gradient(to top, black 30%, transparent 70%)" }}
           draggable={false} />
