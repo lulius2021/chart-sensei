@@ -63,9 +63,13 @@ export default function LandingPage() {
     <div className="min-h-screen bg-surface-0 text-text-primary selection:bg-brand/20 selection:text-white">
       {/* ═══ HERO ═══ */}
       <section className="relative min-h-screen flex flex-col items-center justify-center px-6 overflow-hidden">
-        {/* Background effects */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[600px] bg-brand/[0.03] rounded-full blur-[150px]" />
+        {/* Sensei Background — Hero */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          {/* Sensei 1: Standing with green sword — hero center */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/sensei-1.png" alt="" className="sensei-bg sensei-bg-1 w-[600px] md:w-[800px] lg:w-[1000px] top-0 left-1/2 -translate-x-1/2 opacity-70" draggable={false} />
+          {/* Green glow behind sensei */}
+          <div className="sensei-glow w-[500px] h-[400px] top-[25%] left-1/2 -translate-x-1/2 absolute" />
           <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-surface-4/50 to-transparent" />
         </div>
 
@@ -340,8 +344,14 @@ export default function LandingPage() {
       </section>
 
       {/* ═══ STRATEGY SHOWCASE ═══ */}
-      <section className="py-24 px-6">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <section className="py-24 px-6 relative overflow-hidden">
+        {/* Sensei 2: Action pose — left side background */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/sensei-2.png" alt="" className="sensei-bg sensei-bg-2 w-[550px] md:w-[700px] -left-[50px] top-[-80px] opacity-60" draggable={false} />
+        <div className="sensei-glow w-[400px] h-[400px] left-[50px] top-[100px] absolute" />
+
+        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative">
           <div>
             <p className="text-xs font-medium text-brand/60 tracking-[0.2em] uppercase mb-4">Strategy Library</p>
             <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-4 leading-tight">
@@ -528,7 +538,12 @@ export default function LandingPage() {
       </section>
 
       {/* ═══ FINAL CTA ═══ */}
-      <section className="py-32 px-6 text-center">
+      <section className="py-32 px-6 text-center relative overflow-hidden">
+        {/* Sensei 3: Slash pose — right side background */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/sensei-3.png" alt="" className="sensei-bg sensei-bg-3 w-[500px] md:w-[650px] right-[-20px] top-[-50px] opacity-60" draggable={false} />
+        <div className="sensei-glow w-[350px] h-[350px] right-[100px] top-[80px] absolute" />
         <div className="max-w-2xl mx-auto">
           <SenseiLogo className="w-12 h-12 mx-auto mb-8" />
           <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-4">

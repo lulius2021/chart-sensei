@@ -29,6 +29,58 @@ body {
   color: #fff;
 }
 
+/* ─── Sensei Background Animations ─── */
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  50% { transform: translateY(-20px) scale(1.02); }
+}
+@keyframes float-slow-reverse {
+  0%, 100% { transform: translateY(0px) scale(1) rotate(0deg); }
+  50% { transform: translateY(15px) scale(0.98) rotate(1deg); }
+}
+@keyframes fade-pulse {
+  0%, 100% { opacity: 0.12; }
+  50% { opacity: 0.18; }
+}
+@keyframes fade-pulse-dim {
+  0%, 100% { opacity: 0.08; }
+  50% { opacity: 0.14; }
+}
+@keyframes drift-left {
+  0%, 100% { transform: translateX(0) translateY(0); }
+  50% { transform: translateX(-15px) translateY(-10px); }
+}
+@keyframes drift-right {
+  0%, 100% { transform: translateX(0) translateY(0); }
+  50% { transform: translateX(15px) translateY(-8px); }
+}
+
+.sensei-bg {
+  position: absolute;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  mask-image: linear-gradient(to bottom, black 50%, transparent 95%);
+  -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 95%);
+}
+.sensei-bg-1 {
+  animation: float-slow 12s ease-in-out infinite, fade-pulse 8s ease-in-out infinite;
+}
+.sensei-bg-2 {
+  animation: drift-left 14s ease-in-out infinite, fade-pulse-dim 10s ease-in-out infinite;
+}
+.sensei-bg-3 {
+  animation: drift-right 16s ease-in-out infinite, fade-pulse 9s ease-in-out infinite;
+}
+
+/* Green-tinted sensei glow overlay */
+.sensei-glow {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(52,211,153,0.06) 0%, transparent 70%);
+}
+
 /* Glow border effect */
 .glow-border {
   position: relative;
