@@ -101,15 +101,15 @@ export default function LandingPage() {
       <section className="sensei-section min-h-screen flex flex-col items-center justify-center px-6">
         {/* BG: Light pillar */}
         <div className="sensei-parallax opacity-60" data-speed="0.15" style={{ backgroundImage: "url(/bg-pillar1.png)" }} />
-        {/* Sensei: Green — LARGE, centered */}
+        {/* Sensei: Green — LARGE, pushed to bottom half, behind text */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/sensei-green.png" alt="" data-speed="0.08"
-          className="sensei-char glow-pulse bottom-0 left-1/2 w-[110vw] max-w-[1500px]"
-          style={{ transform: "translateX(-50%)", maskImage: "linear-gradient(to bottom, black 70%, transparent 100%)", WebkitMaskImage: "linear-gradient(to bottom, black 70%, transparent 100%)" }}
+          className="sensei-char glow-pulse bottom-[-15%] left-1/2 w-[100vw] max-w-[1200px] z-[1]"
+          style={{ transform: "translateX(-50%)", maskImage: "linear-gradient(to top, black 30%, transparent 70%), linear-gradient(to bottom, transparent 0%, black 30%)", WebkitMaskImage: "linear-gradient(to top, black 30%, transparent 70%)" }}
           draggable={false} />
         <Particles count={25} />
 
-        <div className="relative z-10 text-center max-w-4xl">
+        <div className="relative z-20 text-center max-w-4xl">
           <div className="mb-6 flex justify-center"><Logo className="w-14 h-14" /></div>
 
           <div className="reveal inline-flex items-center gap-2 bg-brand/[0.08] border border-brand/[0.15] rounded-full px-5 py-2 mb-8">
@@ -209,12 +209,12 @@ export default function LandingPage() {
         <div className="sensei-parallax opacity-55" data-speed="0.3" style={{ backgroundImage: "url(/bg-pillar2.png)" }} />
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/sensei-red.png" alt="" data-speed="0.1"
-          className="sensei-char glow-pulse bottom-0 left-[-5%] w-[110vw] max-w-[1300px]"
-          style={{ maskImage: "linear-gradient(to bottom, black 55%, transparent 100%), linear-gradient(to right, black 50%, transparent 100%)", WebkitMaskImage: "linear-gradient(to bottom, black 55%, transparent 100%)" }}
+          className="sensei-char glow-pulse bottom-[-10%] left-[-5%] w-[90vw] max-w-[1000px] z-[1]"
+          style={{ maskImage: "linear-gradient(to top, black 20%, transparent 65%)", WebkitMaskImage: "linear-gradient(to top, black 20%, transparent 65%)" }}
           draggable={false} />
         <Particles count={15} />
 
-        <div className="relative z-10 text-center max-w-3xl px-6">
+        <div className="relative z-20 text-center max-w-3xl px-6">
           <p className="reveal text-xs font-medium text-brand/50 tracking-[0.25em] uppercase mb-4">Strategy Library</p>
           <h2 className="reveal text-4xl md:text-6xl font-black text-white mb-8">
             19 proven strategies
@@ -287,6 +287,7 @@ export default function LandingPage() {
                       { l: "Direction", v: "↑ Bullish", c: "text-profit" },
                       { l: "Entry", v: "$67,400", c: "text-profit" },
                       { l: "Stop Loss", v: "$65,200", c: "text-loss" },
+                      { l: "TP1", v: "$71,500", c: "text-profit" },
                       { l: "R:R", v: "1:2.4", c: "text-warn" },
                     ].map((r) => (
                       <div key={r.l} className="bg-white/[0.03] border border-white/[0.05] rounded px-2.5 py-1.5 flex items-center justify-between mb-1">
