@@ -30,7 +30,7 @@ const strategies = [
 ];
 
 const diffColor: Record<string, string> = {
-  Beginner: "bg-brand-muted text-brand",
+  Beginner: "bg-brand/10 text-brand",
   Intermediate: "bg-amber-500/10 text-amber-400",
   Advanced: "bg-rose-500/10 text-rose-400",
 };
@@ -40,32 +40,32 @@ export default function LearnPage() {
     <div className="p-8 lg:p-10 max-w-4xl">
       <div className="mb-8">
         <h1 className="text-2xl font-bold text-white mb-1">Learn Strategies</h1>
-        <p className="text-text-muted text-sm">Master 19 trading strategies from beginner to advanced</p>
+        <p className="text-neutral-500 text-sm">Master 19 trading strategies from beginner to advanced</p>
       </div>
 
       {strategies.map((section) => (
         <div key={section.category} className="mb-8">
-          <h2 className="text-xs uppercase tracking-wider text-text-faint font-semibold mb-3">{section.category}</h2>
+          <h2 className="text-xs uppercase tracking-wider text-neutral-700 font-semibold mb-3">{section.category}</h2>
           <div className="space-y-2">
             {section.items.map((s) => (
               <Link
                 key={s.id}
                 href={s.free ? `/learn/${s.id}` : "/pricing"}
-                className="flex items-center gap-4 bg-surface-2 border border-surface-4 rounded-xl px-5 py-4 hover:border-brand/20 transition group"
+                className="flex items-center gap-4 bg-white/[0.02] border border-white/[0.06] rounded-xl px-5 py-4 hover:border-brand/20 transition group"
               >
                 <div className={`w-7 h-7 rounded-full flex items-center justify-center text-[11px] font-bold ${
-                  s.free ? "bg-surface-3 text-text-dim group-hover:bg-brand-muted group-hover:text-brand" : "bg-surface-3 text-text-faint"
+                  s.free ? "bg-white/[0.04] text-neutral-600 group-hover:bg-brand/10 group-hover:text-brand" : "bg-white/[0.04] text-neutral-700"
                 }`}>
                   {s.id}
                 </div>
                 <div className="flex-1">
-                  <div className={`text-sm font-medium ${s.free ? "text-white" : "text-text-dim"}`}>{s.name}</div>
-                  <div className="text-[11px] text-text-faint mt-0.5">{s.time}</div>
+                  <div className={`text-sm font-medium ${s.free ? "text-white" : "text-neutral-600"}`}>{s.name}</div>
+                  <div className="text-[11px] text-neutral-700 mt-0.5">{s.time}</div>
                 </div>
                 <span className={`text-[10px] font-semibold px-2 py-0.5 rounded ${diffColor[s.difficulty]}`}>
                   {s.difficulty}
                 </span>
-                {!s.free && <Lock className="w-3.5 h-3.5 text-text-faint" />}
+                {!s.free && <Lock className="w-3.5 h-3.5 text-neutral-700" />}
               </Link>
             ))}
           </div>

@@ -94,11 +94,11 @@ export default function JournalPage() {
       <div className="flex items-center justify-between mb-8">
         <div>
           <h1 className="text-2xl font-bold text-white mb-1">Trading Journal</h1>
-          <p className="text-text-muted text-sm">Log your trades and track your progress</p>
+          <p className="text-neutral-500 text-sm">Log your trades and track your progress</p>
         </div>
         <button
           onClick={() => setShowForm(true)}
-          className="flex items-center gap-1.5 bg-brand text-surface-0 px-4 py-2 rounded-lg text-sm font-bold hover:bg-brand-light transition"
+          className="flex items-center gap-1.5 bg-brand text-black px-4 py-2 rounded-lg text-sm font-bold hover:bg-brand-light transition"
         >
           <Plus className="w-4 h-4" /> New Entry
         </button>
@@ -107,21 +107,21 @@ export default function JournalPage() {
       {/* Stats */}
       {entries.length > 0 && (
         <div className="grid grid-cols-4 gap-4 mb-8">
-          <div className="bg-surface-2 border border-surface-4 rounded-xl p-4 text-center">
+          <div className="bg-white/[0.02] border border-white/[0.06] rounded-xl p-4 text-center">
             <div className="text-2xl font-bold text-white">{stats.total}</div>
-            <div className="text-xs text-text-dim">Total Trades</div>
+            <div className="text-xs text-neutral-600">Total Trades</div>
           </div>
-          <div className="bg-surface-2 border border-surface-4 rounded-xl p-4 text-center">
+          <div className="bg-white/[0.02] border border-white/[0.06] rounded-xl p-4 text-center">
             <div className="text-2xl font-bold text-profit">{stats.wins}</div>
-            <div className="text-xs text-text-dim">Wins</div>
+            <div className="text-xs text-neutral-600">Wins</div>
           </div>
-          <div className="bg-surface-2 border border-surface-4 rounded-xl p-4 text-center">
+          <div className="bg-white/[0.02] border border-white/[0.06] rounded-xl p-4 text-center">
             <div className="text-2xl font-bold text-loss">{stats.losses}</div>
-            <div className="text-xs text-text-dim">Losses</div>
+            <div className="text-xs text-neutral-600">Losses</div>
           </div>
-          <div className="bg-surface-2 border border-surface-4 rounded-xl p-4 text-center">
+          <div className="bg-white/[0.02] border border-white/[0.06] rounded-xl p-4 text-center">
             <div className="text-2xl font-bold text-brand">{stats.winRate}%</div>
-            <div className="text-xs text-text-dim">Win Rate</div>
+            <div className="text-xs text-neutral-600">Win Rate</div>
           </div>
         </div>
       )}
@@ -129,81 +129,81 @@ export default function JournalPage() {
       {/* Form Modal */}
       {showForm && (
         <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4">
-          <div className="bg-surface-2 border border-surface-4 rounded-2xl p-6 w-full max-w-lg max-h-[90vh] overflow-y-auto">
+          <div className="bg-white/[0.02] border border-white/[0.06] rounded-2xl p-6 w-full max-w-lg max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between mb-5">
               <h2 className="text-lg font-semibold text-white">Log Trade</h2>
-              <button onClick={() => setShowForm(false)} className="text-text-dim hover:text-white transition">
+              <button onClick={() => setShowForm(false)} className="text-neutral-600 hover:text-white transition">
                 <X className="w-5 h-5" />
               </button>
             </div>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs text-text-muted mb-1">Date</label>
+                  <label className="block text-xs text-neutral-500 mb-1">Date</label>
                   <input type="date" value={form.date} onChange={(e) => setForm({ ...form, date: e.target.value })}
-                    className="w-full bg-surface-3 border border-surface-4 rounded-lg px-3 py-2 text-sm text-white focus:border-brand focus:outline-none" />
+                    className="w-full bg-white/[0.04] border border-white/[0.06] rounded-lg px-3 py-2 text-sm text-white focus:border-brand focus:outline-none" />
                 </div>
                 <div>
-                  <label className="block text-xs text-text-muted mb-1">Pair</label>
+                  <label className="block text-xs text-neutral-500 mb-1">Pair</label>
                   <input type="text" placeholder="BTC/USDT" value={form.pair} onChange={(e) => setForm({ ...form, pair: e.target.value })} required
-                    className="w-full bg-surface-3 border border-surface-4 rounded-lg px-3 py-2 text-sm text-white placeholder-text-dim focus:border-brand focus:outline-none" />
+                    className="w-full bg-white/[0.04] border border-white/[0.06] rounded-lg px-3 py-2 text-sm text-white placeholder-text-dim focus:border-brand focus:outline-none" />
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs text-text-muted mb-1">Direction</label>
+                  <label className="block text-xs text-neutral-500 mb-1">Direction</label>
                   <select value={form.direction} onChange={(e) => setForm({ ...form, direction: e.target.value as "long" | "short" })}
-                    className="w-full bg-surface-3 border border-surface-4 rounded-lg px-3 py-2 text-sm text-white focus:border-brand focus:outline-none">
+                    className="w-full bg-white/[0.04] border border-white/[0.06] rounded-lg px-3 py-2 text-sm text-white focus:border-brand focus:outline-none">
                     <option value="long">Long</option>
                     <option value="short">Short</option>
                   </select>
                 </div>
                 <div>
-                  <label className="block text-xs text-text-muted mb-1">Strategy</label>
+                  <label className="block text-xs text-neutral-500 mb-1">Strategy</label>
                   <input type="text" placeholder="Breakout, S/R bounce..." value={form.strategy} onChange={(e) => setForm({ ...form, strategy: e.target.value })}
-                    className="w-full bg-surface-3 border border-surface-4 rounded-lg px-3 py-2 text-sm text-white placeholder-text-dim focus:border-brand focus:outline-none" />
+                    className="w-full bg-white/[0.04] border border-white/[0.06] rounded-lg px-3 py-2 text-sm text-white placeholder-text-dim focus:border-brand focus:outline-none" />
                 </div>
               </div>
               <div className="grid grid-cols-3 gap-4">
                 <div>
-                  <label className="block text-xs text-text-muted mb-1">Entry Price</label>
+                  <label className="block text-xs text-neutral-500 mb-1">Entry Price</label>
                   <input type="text" placeholder="68200" value={form.entry_price} onChange={(e) => setForm({ ...form, entry_price: e.target.value })}
-                    className="w-full bg-surface-3 border border-surface-4 rounded-lg px-3 py-2 text-sm text-white placeholder-text-dim focus:border-brand focus:outline-none" />
+                    className="w-full bg-white/[0.04] border border-white/[0.06] rounded-lg px-3 py-2 text-sm text-white placeholder-text-dim focus:border-brand focus:outline-none" />
                 </div>
                 <div>
-                  <label className="block text-xs text-text-muted mb-1">Stop Loss</label>
+                  <label className="block text-xs text-neutral-500 mb-1">Stop Loss</label>
                   <input type="text" placeholder="65800" value={form.stop_loss} onChange={(e) => setForm({ ...form, stop_loss: e.target.value })}
-                    className="w-full bg-surface-3 border border-surface-4 rounded-lg px-3 py-2 text-sm text-white placeholder-text-dim focus:border-brand focus:outline-none" />
+                    className="w-full bg-white/[0.04] border border-white/[0.06] rounded-lg px-3 py-2 text-sm text-white placeholder-text-dim focus:border-brand focus:outline-none" />
                 </div>
                 <div>
-                  <label className="block text-xs text-text-muted mb-1">Take Profit</label>
+                  <label className="block text-xs text-neutral-500 mb-1">Take Profit</label>
                   <input type="text" placeholder="74000" value={form.take_profit} onChange={(e) => setForm({ ...form, take_profit: e.target.value })}
-                    className="w-full bg-surface-3 border border-surface-4 rounded-lg px-3 py-2 text-sm text-white placeholder-text-dim focus:border-brand focus:outline-none" />
+                    className="w-full bg-white/[0.04] border border-white/[0.06] rounded-lg px-3 py-2 text-sm text-white placeholder-text-dim focus:border-brand focus:outline-none" />
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs text-text-muted mb-1">Result</label>
+                  <label className="block text-xs text-neutral-500 mb-1">Result</label>
                   <select value={form.result} onChange={(e) => setForm({ ...form, result: e.target.value as JournalEntry["result"] })}
-                    className="w-full bg-surface-3 border border-surface-4 rounded-lg px-3 py-2 text-sm text-white focus:border-brand focus:outline-none">
+                    className="w-full bg-white/[0.04] border border-white/[0.06] rounded-lg px-3 py-2 text-sm text-white focus:border-brand focus:outline-none">
                     <option value="">Still Open</option>
                     <option value="win">Win</option>
                     <option value="loss">Loss</option>
                   </select>
                 </div>
                 <div>
-                  <label className="block text-xs text-text-muted mb-1">P&L</label>
+                  <label className="block text-xs text-neutral-500 mb-1">P&L</label>
                   <input type="text" placeholder="+$240" value={form.pnl} onChange={(e) => setForm({ ...form, pnl: e.target.value })}
-                    className="w-full bg-surface-3 border border-surface-4 rounded-lg px-3 py-2 text-sm text-white placeholder-text-dim focus:border-brand focus:outline-none" />
+                    className="w-full bg-white/[0.04] border border-white/[0.06] rounded-lg px-3 py-2 text-sm text-white placeholder-text-dim focus:border-brand focus:outline-none" />
                 </div>
               </div>
               <div>
-                <label className="block text-xs text-text-muted mb-1">Notes</label>
+                <label className="block text-xs text-neutral-500 mb-1">Notes</label>
                 <textarea rows={3} placeholder="What did you learn from this trade?" value={form.notes} onChange={(e) => setForm({ ...form, notes: e.target.value })}
-                  className="w-full bg-surface-3 border border-surface-4 rounded-lg px-3 py-2 text-sm text-white placeholder-text-dim focus:border-brand focus:outline-none resize-none" />
+                  className="w-full bg-white/[0.04] border border-white/[0.06] rounded-lg px-3 py-2 text-sm text-white placeholder-text-dim focus:border-brand focus:outline-none resize-none" />
               </div>
               <button type="submit" disabled={saving}
-                className="w-full bg-brand text-surface-0 py-3 rounded-xl text-sm font-bold hover:bg-brand-light transition disabled:opacity-50 flex items-center justify-center gap-2">
+                className="w-full bg-brand text-black py-3 rounded-xl text-sm font-bold hover:bg-brand-light transition disabled:opacity-50 flex items-center justify-center gap-2">
                 {saving && <Loader2 className="w-4 h-4 animate-spin" />}
                 {saving ? "Saving..." : "Save Entry"}
               </button>
@@ -221,13 +221,13 @@ export default function JournalPage() {
 
       {/* Empty State */}
       {!loading && entries.length === 0 && !showForm && (
-        <div className="bg-surface-2 border border-surface-4 rounded-2xl p-12 text-center">
+        <div className="bg-white/[0.02] border border-white/[0.06] rounded-2xl p-12 text-center">
           <div className="text-5xl mb-4">📓</div>
           <h2 className="text-lg font-semibold text-white mb-2">No Entries Yet</h2>
-          <p className="text-sm text-text-muted max-w-sm mx-auto mb-6">
+          <p className="text-sm text-neutral-500 max-w-sm mx-auto mb-6">
             Start logging your trades to track your progress, identify patterns in your trading, and improve over time.
           </p>
-          <button onClick={() => setShowForm(true)} className="bg-brand text-surface-0 px-6 py-2.5 rounded-xl text-sm font-bold hover:bg-brand-light transition">
+          <button onClick={() => setShowForm(true)} className="bg-brand text-black px-6 py-2.5 rounded-xl text-sm font-bold hover:bg-brand-light transition">
             Log First Trade
           </button>
         </div>
@@ -237,33 +237,33 @@ export default function JournalPage() {
       {!loading && entries.length > 0 && (
         <div className="space-y-3">
           {entries.map((entry) => (
-            <div key={entry.id} className="bg-surface-2 border border-surface-4 rounded-xl px-5 py-4 group">
+            <div key={entry.id} className="bg-white/[0.02] border border-white/[0.06] rounded-xl px-5 py-4 group">
               <div className="flex items-center gap-3 mb-2">
                 <span className={`flex items-center gap-1 text-xs font-semibold px-2 py-0.5 rounded ${
-                  entry.direction === "long" ? "bg-brand-muted text-brand" : "bg-loss/10 text-loss"
+                  entry.direction === "long" ? "bg-brand/10 text-brand" : "bg-loss/10 text-loss"
                 }`}>
                   {entry.direction === "long" ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />}
                   {entry.direction.toUpperCase()}
                 </span>
                 <span className="text-sm font-semibold text-white">{entry.pair}</span>
-                <span className="text-xs text-text-dim">{entry.date}</span>
-                {entry.strategy && <span className="text-xs text-text-dim bg-surface-3 px-2 py-0.5 rounded">{entry.strategy}</span>}
+                <span className="text-xs text-neutral-600">{entry.date}</span>
+                {entry.strategy && <span className="text-xs text-neutral-600 bg-white/[0.04] px-2 py-0.5 rounded">{entry.strategy}</span>}
                 <span className="ml-auto flex items-center gap-3">
                   {entry.result === "win" && <span className="text-xs font-semibold text-profit">WIN {entry.pnl}</span>}
                   {entry.result === "loss" && <span className="text-xs font-semibold text-loss">LOSS {entry.pnl}</span>}
-                  {(!entry.result || entry.result === "open") && <span className="text-xs text-text-dim">OPEN</span>}
+                  {(!entry.result || entry.result === "open") && <span className="text-xs text-neutral-600">OPEN</span>}
                   <button onClick={() => handleDelete(entry.id)}
-                    className="opacity-0 group-hover:opacity-100 text-text-dim hover:text-loss transition">
+                    className="opacity-0 group-hover:opacity-100 text-neutral-600 hover:text-loss transition">
                     <Trash2 className="w-3.5 h-3.5" />
                   </button>
                 </span>
               </div>
-              <div className="flex gap-6 text-xs text-text-dim">
+              <div className="flex gap-6 text-xs text-neutral-600">
                 <span>Entry: {entry.entry_price}</span>
                 <span>SL: {entry.stop_loss}</span>
                 <span>TP: {entry.take_profit}</span>
               </div>
-              {entry.notes && <p className="text-xs text-text-muted mt-2 italic">{entry.notes}</p>}
+              {entry.notes && <p className="text-xs text-neutral-500 mt-2 italic">{entry.notes}</p>}
             </div>
           ))}
         </div>

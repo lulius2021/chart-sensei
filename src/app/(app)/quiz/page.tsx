@@ -183,24 +183,24 @@ export default function QuizPage() {
     const pct = Math.round((score / questions.length) * 100);
     return (
       <div className="p-8 lg:p-10 max-w-2xl mx-auto">
-        <div className="bg-surface-2 border border-surface-4 rounded-2xl p-10 text-center">
+        <div className="bg-white/[0.02] border border-white/[0.06] rounded-2xl p-10 text-center">
           <Trophy className={`w-16 h-16 mx-auto mb-4 ${pct >= 70 ? "text-brand" : pct >= 50 ? "text-warn" : "text-loss"}`} />
           <h1 className="text-3xl font-bold text-white mb-2">Quiz Complete!</h1>
           <div className="text-5xl font-extrabold my-6">
             <span className={pct >= 70 ? "text-brand" : pct >= 50 ? "text-warn" : "text-loss"}>{pct}%</span>
           </div>
-          <p className="text-text-muted mb-2">{score} of {questions.length} correct</p>
-          <p className="text-sm text-text-secondary mb-8">
+          <p className="text-neutral-500 mb-2">{score} of {questions.length} correct</p>
+          <p className="text-sm text-neutral-300 mb-8">
             {pct >= 90 ? "Excellent! You really know your stuff." :
              pct >= 70 ? "Great job! Keep learning and you'll master this." :
              pct >= 50 ? "Good start. Review the strategies you missed." :
              "Keep studying! Review the Learn section and try again."}
           </p>
           <div className="flex gap-3 justify-center">
-            <button onClick={handleRestart} className="flex items-center gap-2 bg-brand text-surface-0 px-6 py-3 rounded-xl text-sm font-bold hover:bg-brand-light transition">
+            <button onClick={handleRestart} className="flex items-center gap-2 bg-brand text-black px-6 py-3 rounded-xl text-sm font-bold hover:bg-brand-light transition">
               <RotateCcw className="w-4 h-4" /> Try Again
             </button>
-            <a href="/learn" className="flex items-center gap-2 border border-surface-4 text-white px-6 py-3 rounded-xl text-sm font-medium hover:border-text-dim transition">
+            <a href="/learn" className="flex items-center gap-2 border border-white/[0.06] text-white px-6 py-3 rounded-xl text-sm font-medium hover:border-text-dim transition">
               Review Strategies
             </a>
           </div>
@@ -213,7 +213,7 @@ export default function QuizPage() {
     <div className="p-8 lg:p-10 max-w-2xl mx-auto">
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-lg font-bold text-white">Quiz Mode</h1>
-        <span className="text-sm text-text-muted">
+        <span className="text-sm text-neutral-500">
           <span className="text-brand font-semibold">{score}</span> / {questions.length} correct
         </span>
       </div>
@@ -231,7 +231,7 @@ export default function QuizPage() {
       </div>
 
       {/* Question */}
-      <div className="bg-surface-2 border border-surface-4 rounded-2xl p-6 mb-6">
+      <div className="bg-white/[0.02] border border-white/[0.06] rounded-2xl p-6 mb-6">
         <div className="text-4xl mb-4 text-center">{q.image}</div>
         <p className="text-base font-semibold text-white text-center leading-relaxed">{q.question}</p>
       </div>
@@ -239,7 +239,7 @@ export default function QuizPage() {
       {/* Options */}
       <div className="grid grid-cols-1 gap-3 mb-6">
         {q.options.map((opt, i) => {
-          let style = "bg-surface-2 border-surface-4 hover:border-text-dim";
+          let style = "bg-white/[0.02] border-white/[0.06] hover:border-text-dim";
           if (answered && i === q.correct) style = "bg-brand/10 border-brand";
           else if (answered && i === selected && i !== q.correct) style = "bg-loss/10 border-loss";
           else if (selected === i && !answered) style = "bg-brand/5 border-brand/50";
@@ -252,7 +252,7 @@ export default function QuizPage() {
               className={`border-2 rounded-xl p-4 text-left transition ${style}`}
             >
               <div className="text-sm font-semibold text-white mb-0.5">{opt.label}</div>
-              <div className="text-xs text-text-muted">{opt.description}</div>
+              <div className="text-xs text-neutral-500">{opt.description}</div>
             </button>
           );
         })}
@@ -264,14 +264,14 @@ export default function QuizPage() {
           <div className={`text-sm font-semibold mb-2 ${selected === q.correct ? "text-brand" : "text-loss"}`}>
             {selected === q.correct ? "✓ Correct!" : "✗ Incorrect"}
           </div>
-          <p className="text-xs text-text-secondary leading-relaxed">{q.explanation}</p>
+          <p className="text-xs text-neutral-300 leading-relaxed">{q.explanation}</p>
         </div>
       )}
 
       {answered && (
         <button
           onClick={handleNext}
-          className="w-full flex items-center justify-center gap-2 bg-brand text-surface-0 py-3 rounded-xl text-sm font-bold hover:bg-brand-light transition"
+          className="w-full flex items-center justify-center gap-2 bg-brand text-black py-3 rounded-xl text-sm font-bold hover:bg-brand-light transition"
         >
           {current + 1 >= questions.length ? "See Results" : "Next Question"} <ArrowRight className="w-4 h-4" />
         </button>
