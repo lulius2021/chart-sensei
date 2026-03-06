@@ -63,9 +63,19 @@ export default function LandingPage() {
     <div className="min-h-screen bg-surface-0 text-text-primary selection:bg-brand/20 selection:text-white">
       {/* ═══ HERO ═══ */}
       <section className="relative min-h-screen flex flex-col items-center justify-center px-6 overflow-hidden">
-        {/* Background effects — subtle, not flashy */}
+        {/* Sensei Background Figure */}
+        <div className="absolute inset-0 pointer-events-none flex items-start justify-center overflow-hidden">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/sensei-bg.svg"
+            alt=""
+            className="w-[700px] md:w-[800px] lg:w-[900px] mt-[-50px] opacity-60 select-none"
+            draggable={false}
+          />
+        </div>
+        {/* Additional ambient glow */}
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[600px] bg-brand/[0.03] rounded-full blur-[150px]" />
+          <div className="absolute top-[20%] left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-brand/[0.02] rounded-full blur-[120px]" />
           <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-surface-4/50 to-transparent" />
         </div>
 

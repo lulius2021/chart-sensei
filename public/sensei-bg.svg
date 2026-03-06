@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" fill="none" opacity="1">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="35%" r="50%">
+      <stop offset="0%" stop-color="#34d399" stop-opacity="0.04"/>
+      <stop offset="100%" stop-color="#34d399" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="fadeOut" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="white" stop-opacity="1"/>
+      <stop offset="70%" stop-color="white" stop-opacity="1"/>
+      <stop offset="100%" stop-color="white" stop-opacity="0"/>
+    </linearGradient>
+    <mask id="fadeMask">
+      <rect width="800" height="1000" fill="url(#fadeOut)"/>
+    </mask>
+  </defs>
+  
+  <!-- Ambient glow -->
+  <ellipse cx="400" cy="350" rx="350" ry="300" fill="url(#glow)"/>
+  
+  <g mask="url(#fadeMask)">
+    <!-- Hood outer shape -->
+    <path d="M400 80 
+             C280 80 200 160 180 260
+             C160 360 170 420 175 480
+             L180 520
+             C190 580 220 620 260 650
+             Q330 700 400 710
+             Q470 700 540 650
+             C580 620 610 580 620 520
+             L625 480
+             C630 420 640 360 620 260
+             C600 160 520 80 400 80Z" 
+          fill="#1a1f3a" opacity="0.5"/>
+    
+    <!-- Hood inner shadow -->
+    <path d="M400 100 
+             C300 100 230 170 210 260
+             C190 350 195 400 200 460
+             L205 500
+             C215 555 240 590 275 618
+             Q335 660 400 668
+             Q465 660 525 618
+             C560 590 585 555 595 500
+             L600 460
+             C605 400 610 350 590 260
+             C570 170 500 100 400 100Z" 
+          fill="#0f1221" opacity="0.7"/>
+    
+    <!-- Face shadow area -->
+    <ellipse cx="400" cy="280" rx="100" ry="85" fill="#0a0d18" opacity="0.8"/>
+    
+    <!-- Eyes - glowing emerald -->
+    <ellipse cx="360" cy="270" rx="12" ry="5" fill="#34d399" opacity="0.7"/>
+    <ellipse cx="440" cy="270" rx="12" ry="5" fill="#34d399" opacity="0.7"/>
+    
+    <!-- Eye glow aura -->
+    <ellipse cx="360" cy="270" rx="25" ry="12" fill="#34d399" opacity="0.08"/>
+    <ellipse cx="440" cy="270" rx="25" ry="12" fill="#34d399" opacity="0.08"/>
+    <ellipse cx="360" cy="270" rx="40" ry="20" fill="#34d399" opacity="0.03"/>
+    <ellipse cx="440" cy="270" rx="40" ry="20" fill="#34d399" opacity="0.03"/>
+    
+    <!-- Connecting eye glow -->
+    <ellipse cx="400" cy="270" rx="80" ry="15" fill="#34d399" opacity="0.02"/>
+    
+    <!-- Robe body -->
+    <path d="M260 650
+             C240 700 220 760 200 840
+             L180 920
+             C160 970 140 1000 120 1000
+             L680 1000
+             C660 1000 640 970 620 920
+             L600 840
+             C580 760 560 700 540 650
+             Q470 700 400 710
+             Q330 700 260 650Z"
+          fill="#1a1f3a" opacity="0.35"/>
+    
+    <!-- Inner robe fold -->
+    <path d="M280 660
+             C265 710 250 770 235 850
+             L225 930
+             L575 930
+             L565 850
+             C550 770 535 710 520 660
+             Q465 695 400 702
+             Q335 695 280 660Z"
+          fill="#151a30" opacity="0.3"/>
+    
+    <!-- Robe center fold line -->
+    <path d="M400 380 L400 710 L395 850 L400 1000" 
+          stroke="#34d399" stroke-width="1" opacity="0.06"/>
+    
+    <!-- Collar / robe neckline -->
+    <path d="M340 440 L400 510 L460 440" 
+          stroke="#34d399" stroke-width="1.5" fill="none" opacity="0.1"/>
+    
+    <!-- Subtle shoulder lines -->
+    <path d="M280 520 Q340 540 400 530 Q460 540 520 520" 
+          stroke="#34d399" stroke-width="1" fill="none" opacity="0.05"/>
+    
+    <!-- Floating chart elements around sensei -->
+    <!-- Left candles -->
+    <g opacity="0.12" transform="translate(140, 400)">
+      <rect x="0" y="0" width="6" height="30" rx="1" fill="#34d399"/>
+      <rect x="14" y="8" width="6" height="20" rx="1" fill="#fb7185"/>
+      <rect x="28" y="-5" width="6" height="35" rx="1" fill="#34d399"/>
+    </g>
+    
+    <!-- Right candles -->
+    <g opacity="0.12" transform="translate(620, 380)">
+      <rect x="0" y="5" width="6" height="25" rx="1" fill="#34d399"/>
+      <rect x="14" y="0" width="6" height="30" rx="1" fill="#34d399"/>
+      <rect x="28" y="10" width="6" height="18" rx="1" fill="#fb7185"/>
+    </g>
+    
+    <!-- Floating data points -->
+    <circle cx="180" cy="350" r="2" fill="#34d399" opacity="0.15"/>
+    <circle cx="620" cy="330" r="2" fill="#34d399" opacity="0.15"/>
+    <circle cx="200" cy="500" r="1.5" fill="#34d399" opacity="0.1"/>
+    <circle cx="600" cy="480" r="1.5" fill="#34d399" opacity="0.1"/>
+  </g>
+</svg>
