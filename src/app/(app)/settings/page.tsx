@@ -11,11 +11,11 @@ export default function SettingsPage() {
 
   useEffect(() => {
     const supabase = createClient();
-    supabase.auth.getUser().then(({ data }) => {
+    supabase.auth.getUser().then(({ data }: { data: { user: { id: string; email?: string } | null } }) => {
       setUser(data.user);
       if (data.user) {
         supabase.from("profiles").select("is_pro").eq("id", data.user.id).single()
-          .then(({ data: profile }) => setIsPro(profile?.is_pro || false));
+          .then(({ data: profile }: { data: { is_pro?: boolean } | null }) => setIsPro(profile?.is_pro || false));
       }
     });
   }, []);
