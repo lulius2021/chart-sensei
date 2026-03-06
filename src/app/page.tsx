@@ -91,14 +91,23 @@ export default function LandingPage() {
     <div ref={parallaxRef} className="min-h-screen bg-black text-white selection:bg-brand/20">
 
       {/* ═══════════════════════════════════════════
-          HERO — Fullscreen sensei background
+          HERO — Background scene + sensei reveal
       ═══════════════════════════════════════════ */}
       <section className="sensei-section min-h-screen flex flex-col items-center justify-center px-6">
-        {/* Sensei: Sitting with green sword */}
+        {/* Background: Light pillar scene */}
         <div
-          className="sensei-parallax opacity-40"
-          data-speed="0.2"
-          style={{ backgroundImage: "url(/sensei-hero.png)" }}
+          className="sensei-parallax opacity-30"
+          data-speed="0.15"
+          style={{ backgroundImage: "url(/bg-pillar1.png)" }}
+        />
+        {/* Sensei: Green sword — fades in */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/sensei-green.png"
+          alt=""
+          className="sensei-character fade-up bottom-[-30px] left-1/2 -translate-x-1/2 w-[500px] md:w-[650px] lg:w-[800px]"
+          style={{ maskImage: "linear-gradient(to bottom, black 60%, transparent 100%)", WebkitMaskImage: "linear-gradient(to bottom, black 60%, transparent 100%)" }}
+          draggable={false}
         />
 
         <div className="relative text-center max-w-4xl z-10">
@@ -166,12 +175,12 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ═══ SENSEI DUEL — Fullscreen parallax divider ═══ */}
+      {/* ═══ TORII GATE — Fullscreen parallax divider ═══ */}
       <section className="sensei-section h-[70vh] flex items-center justify-center">
         <div
           className="sensei-parallax opacity-50"
-          data-speed="0.35"
-          style={{ backgroundImage: "url(/sensei-duel.png)" }}
+          data-speed="0.3"
+          style={{ backgroundImage: "url(/bg-torii.png)" }}
         />
         <div className="relative z-10 text-center fade-up">
           <p className="text-xs font-medium text-brand/50 tracking-[0.2em] uppercase mb-4">How it works</p>
@@ -203,12 +212,21 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ═══ SENSEI ACTION — Fullscreen parallax ═══ */}
+      {/* ═══ SENSEI ACTION — Background + red sensei reveal ═══ */}
       <section className="sensei-section h-[80vh] flex items-center justify-center">
         <div
-          className="sensei-parallax opacity-45"
-          data-speed="0.4"
-          style={{ backgroundImage: "url(/sensei-action.png)" }}
+          className="sensei-parallax opacity-30"
+          data-speed="0.35"
+          style={{ backgroundImage: "url(/bg-pillar2.png)" }}
+        />
+        {/* Sensei: Red sword — fades in from side */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/sensei-red.png"
+          alt=""
+          className="sensei-character fade-up bottom-[-30px] left-[5%] w-[400px] md:w-[550px] lg:w-[650px]"
+          style={{ maskImage: "linear-gradient(to bottom, black 60%, transparent 100%)", WebkitMaskImage: "linear-gradient(to bottom, black 60%, transparent 100%)" }}
+          draggable={false}
         />
         <div className="relative z-10 max-w-3xl text-center px-6 fade-up">
           <p className="text-xs font-medium text-brand/50 tracking-[0.2em] uppercase mb-4">Strategy Library</p>
@@ -309,9 +327,17 @@ export default function LandingPage() {
       {/* ═══ SENSEI CLASH — Pricing divider ═══ */}
       <section className="sensei-section h-[60vh] flex items-center justify-center">
         <div
-          className="sensei-parallax opacity-40"
-          data-speed="0.3"
-          style={{ backgroundImage: "url(/sensei-clash.png)" }}
+          className="sensei-parallax opacity-25"
+          data-speed="0.25"
+          style={{ backgroundImage: "url(/bg-pillar1.png)" }}
+        />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/sensei-hero.png"
+          alt=""
+          className="sensei-character fade-up bottom-[-50px] right-[2%] w-[350px] md:w-[450px]"
+          style={{ maskImage: "radial-gradient(ellipse at center, black 40%, transparent 75%)", WebkitMaskImage: "radial-gradient(ellipse at center, black 40%, transparent 75%)" }}
+          draggable={false}
         />
         <div className="relative z-10 text-center fade-up">
           <p className="text-xs font-medium text-brand/50 tracking-[0.2em] uppercase mb-4">Pricing</p>

@@ -88,6 +88,25 @@ body {
 .stagger.visible > *:nth-child(5) { transition-delay: 400ms; opacity: 1; transform: translateY(0); }
 .stagger.visible > *:nth-child(6) { transition-delay: 500ms; opacity: 1; transform: translateY(0); }
 
+/* ─── Sensei Reveal Animation ─── */
+@keyframes sensei-reveal {
+  0% { opacity: 0; transform: scale(1.05) translateY(30px); filter: brightness(2) blur(4px); }
+  60% { opacity: 1; filter: brightness(1.2) blur(0px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); filter: brightness(1) blur(0px); }
+}
+
+.sensei-character {
+  position: absolute;
+  pointer-events: none;
+  user-select: none;
+  z-index: 2;
+  opacity: 0;
+  mix-blend-mode: screen;
+}
+.sensei-character.visible {
+  animation: sensei-reveal 1.5s ease-out forwards;
+}
+
 /* Glow border effect */
 .glow-border {
   position: relative;

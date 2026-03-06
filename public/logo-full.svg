@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <defs>
+    <linearGradient id="sword" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#34d399"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="glow-strong">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="512" height="512" rx="80" fill="#000"/>
+  
+  <!-- Hood/Head -->
+  <path d="M256 90 C180 90 130 150 120 220 C110 290 115 330 125 370 L140 380 C160 350 200 320 256 315 C312 320 352 350 372 380 L387 370 C397 330 402 290 392 220 C382 150 332 90 256 90Z" fill="#0a0a0a" stroke="#1a1a1a" stroke-width="1"/>
+  
+  <!-- Face shadow -->
+  <ellipse cx="256" cy="230" rx="65" ry="50" fill="#000"/>
+  
+  <!-- Eyes - glowing -->
+  <g filter="url(#glow)">
+    <path d="M218 222 Q228 215 240 222 Q228 226 218 222Z" fill="#34d399"/>
+    <path d="M272 222 Q282 215 294 222 Q282 226 272 222Z" fill="#34d399"/>
+  </g>
+  
+  <!-- Robe body -->
+  <path d="M125 370 C115 400 105 440 95 480 L95 512 L417 512 L417 480 C407 440 397 400 387 370 C352 395 312 410 256 410 C200 410 160 395 125 370Z" fill="#0a0a0a" stroke="#1a1a1a" stroke-width="1"/>
+  
+  <!-- Robe center fold -->
+  <path d="M252 320 L248 410 L244 512" stroke="#1a1a1a" stroke-width="1.5" fill="none"/>
+  <path d="M260 320 L264 410 L268 512" stroke="#1a1a1a" stroke-width="1.5" fill="none"/>
+  
+  <!-- Collar V -->
+  <path d="M220 330 L256 375 L292 330" stroke="#34d399" stroke-width="2" fill="none" opacity="0.3"/>
+  
+  <!-- Katana blade -->
+  <g filter="url(#glow-strong)">
+    <path d="M160 360 L80 440 L60 460 L55 455 L75 435 L155 355Z" fill="url(#sword)" opacity="0.9"/>
+    <!-- Blade edge glow -->
+    <path d="M160 360 L60 460" stroke="#6ee7b7" stroke-width="2" opacity="0.6"/>
+  </g>
+  
+  <!-- Katana handle -->
+  <rect x="158" y="352" width="30" height="10" rx="2" fill="#222" transform="rotate(-45 173 357)"/>
+  <rect x="162" y="348" width="8" height="18" rx="1" fill="#333" transform="rotate(-45 166 357)"/>
+  <!-- Tsuba (guard) -->
+  <ellipse cx="170" cy="358" rx="8" ry="4" fill="#333" transform="rotate(-45 170 358)"/>
+  
+  <!-- Subtle candlestick pattern on robe -->
+  <g opacity="0.15">
+    <rect x="230" y="430" width="6" height="20" rx="1" fill="#34d399"/>
+    <rect x="242" y="435" width="6" height="15" rx="1" fill="#fb7185"/>
+    <rect x="254" y="425" width="6" height="25" rx="1" fill="#34d399"/>
+    <rect x="266" y="432" width="6" height="18" rx="1" fill="#34d399"/>
+    <rect x="278" y="438" width="6" height="12" rx="1" fill="#fb7185"/>
+  </g>
+  
+  <!-- Ambient particles -->
+  <circle cx="100" cy="200" r="1.5" fill="#34d399" opacity="0.3"/>
+  <circle cx="400" cy="180" r="1" fill="#34d399" opacity="0.2"/>
+  <circle cx="130" cy="300" r="1" fill="#34d399" opacity="0.15"/>
+  <circle cx="380" cy="280" r="1.5" fill="#34d399" opacity="0.2"/>
+  <circle cx="350" cy="150" r="1" fill="#34d399" opacity="0.15"/>
+</svg>
