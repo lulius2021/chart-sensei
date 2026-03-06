@@ -17,19 +17,19 @@ const config: Config = {
           glow: "rgba(52, 211, 153, 0.15)",
         },
         surface: {
-          0: "#0f1221",    // deepest navy bg
-          1: "#141831",    // sidebar/nav
-          2: "#1a1f3a",    // cards
-          3: "#212747",    // elevated cards/inputs
-          4: "#2a3155",    // borders
-          5: "#343c63",    // hover borders
+          0: "#000000",    // pure black
+          1: "#0a0a0a",    // near black
+          2: "#111111",    // cards
+          3: "#1a1a1a",    // elevated
+          4: "#222222",    // borders
+          5: "#2a2a2a",    // hover borders
         },
         text: {
-          primary: "#eef0f6",
-          secondary: "#a0a8c0",
-          muted: "#7a84a3",
-          dim: "#565f80",
-          faint: "#3d4566",
+          primary: "#f0f0f0",
+          secondary: "#a0a0a0",
+          muted: "#777777",
+          dim: "#555555",
+          faint: "#333333",
         },
         profit: "#34d399",
         loss: "#fb7185",
@@ -49,7 +49,7 @@ const config: Config = {
       boxShadow: {
         glow: "0 0 20px rgba(52, 211, 153, 0.15)",
         "glow-sm": "0 0 10px rgba(52, 211, 153, 0.1)",
-        "card": "0 4px 24px rgba(0, 0, 0, 0.2)",
+        "card": "0 4px 24px rgba(0, 0, 0, 0.4)",
       },
     },
   },

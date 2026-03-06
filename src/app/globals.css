@@ -2,25 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
 :root {
   --brand: #34d399;
-  --surface-0: #0f1221;
-  --surface-1: #141831;
-  --surface-2: #1a1f3a;
-  --surface-3: #212747;
-  --surface-4: #2a3155;
 }
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: #2a3155 transparent;
+  scrollbar-color: #222 transparent;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--surface-0);
-  color: #eef0f6;
+  background: #000;
+  color: #f0f0f0;
   font-family: 'Inter', system-ui, sans-serif;
 }
 
@@ -29,57 +28,65 @@ body {
   color: #fff;
 }
 
-/* ─── Sensei Background Animations ─── */
-@keyframes float-slow {
-  0%, 100% { transform: translateY(0px) scale(1); }
-  50% { transform: translateY(-20px) scale(1.02); }
-}
-@keyframes float-slow-reverse {
-  0%, 100% { transform: translateY(0px) scale(1) rotate(0deg); }
-  50% { transform: translateY(15px) scale(0.98) rotate(1deg); }
-}
-@keyframes fade-pulse {
-  0%, 100% { opacity: 0.12; }
-  50% { opacity: 0.18; }
-}
-@keyframes fade-pulse-dim {
-  0%, 100% { opacity: 0.08; }
-  50% { opacity: 0.14; }
-}
-@keyframes drift-left {
-  0%, 100% { transform: translateX(0) translateY(0); }
-  50% { transform: translateX(-15px) translateY(-10px); }
-}
-@keyframes drift-right {
-  0%, 100% { transform: translateX(0) translateY(0); }
-  50% { transform: translateX(15px) translateY(-8px); }
+/* ─── Parallax Sensei Backgrounds ─── */
+.sensei-section {
+  position: relative;
+  overflow: hidden;
 }
 
-.sensei-bg {
+.sensei-parallax {
   position: absolute;
+  inset: -100px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   pointer-events: none;
-  user-select: none;
-  -webkit-user-drag: none;
-  mask-image: linear-gradient(to bottom, black 50%, transparent 95%);
-  -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 95%);
-}
-.sensei-bg-1 {
-  animation: float-slow 12s ease-in-out infinite, fade-pulse 8s ease-in-out infinite;
-}
-.sensei-bg-2 {
-  animation: drift-left 14s ease-in-out infinite, fade-pulse-dim 10s ease-in-out infinite;
-}
-.sensei-bg-3 {
-  animation: drift-right 16s ease-in-out infinite, fade-pulse 9s ease-in-out infinite;
+  will-change: transform;
+  transition: transform 0.1s linear;
 }
 
-/* Green-tinted sensei glow overlay */
-.sensei-glow {
+/* Fade edges so no borders are visible */
+.sensei-parallax::after {
+  content: '';
   position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 20%, #000 70%);
   pointer-events: none;
-  border-radius: 50%;
-  background: radial-gradient(ellipse, rgba(52,211,153,0.06) 0%, transparent 70%);
 }
+
+/* Scroll-triggered fade-in animations */
+.fade-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fade-scale {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.fade-scale.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Stagger children */
+.stagger > * {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.stagger.visible > *:nth-child(1) { transition-delay: 0ms; opacity: 1; transform: translateY(0); }
+.stagger.visible > *:nth-child(2) { transition-delay: 100ms; opacity: 1; transform: translateY(0); }
+.stagger.visible > *:nth-child(3) { transition-delay: 200ms; opacity: 1; transform: translateY(0); }
+.stagger.visible > *:nth-child(4) { transition-delay: 300ms; opacity: 1; transform: translateY(0); }
+.stagger.visible > *:nth-child(5) { transition-delay: 400ms; opacity: 1; transform: translateY(0); }
+.stagger.visible > *:nth-child(6) { transition-delay: 500ms; opacity: 1; transform: translateY(0); }
 
 /* Glow border effect */
 .glow-border {
@@ -91,7 +98,7 @@ body {
   inset: -1px;
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(135deg, rgba(52,211,153,0.4), rgba(96,165,250,0.2), rgba(52,211,153,0.1));
+  background: linear-gradient(135deg, rgba(52,211,153,0.4), rgba(52,211,153,0.05));
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
